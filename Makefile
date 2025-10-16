@@ -28,10 +28,11 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 
 $(OBJDIRB)/%_bonus.o: $(SRCDIR)/%.cpp
 	@test -d $(OBJDIRB) || mkdir $(OBJDIRB)
-	@$(CC) $(CFLAGS) -DBONUS -c $< -o $@
+	@$(CC) $(CFLAGS) -DBONUS -c $< -o $@ && printf "$(GREEN)✔️ $(notdir $<) compiled\n"
 
 clean:
 	@rm -rf $(OBJDIR)
+	@printf "$(GREEN)✔️ clean\n"
 
 fclean: clean cleanb
 	@rm -rf $(NAME)
@@ -39,6 +40,8 @@ fclean: clean cleanb
 
 cleanb: 
 	@rm -rf $(OBJDIRB)
+	@printf "$(GREEN)✔️ clean bonus\n"
+
 
 re: clean all
 

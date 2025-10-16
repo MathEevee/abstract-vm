@@ -1,5 +1,7 @@
 #include <iostream>
 #include <fstream>
+#include <stack>
+#include "IOperand.hpp"
 #include "MyExceptions.hpp"
 
 
@@ -43,11 +45,12 @@ void    open_file(const char *av)
         test_f();
     }
 }
-
+template <typename T>
 void    open_term(void)
 {
     std::string line = "";
     int i = 0;
+    std::stack<T> my_stack;
     while (getline(std::cin, line, '\n'))
     {
         // std::cout << line << std::endl;
@@ -65,7 +68,7 @@ int main(int ac, char **av)
         if (ac == 2)
             open_file(av[1]);
         else if (ac == 1)
-            open_term();
+            open_term<IOperand *>();
         else
             throw TooManyParams();
     }
