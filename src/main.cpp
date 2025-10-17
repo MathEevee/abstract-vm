@@ -3,6 +3,8 @@
 #include <stack>
 #include "IOperand.hpp"
 #include "MyExceptions.hpp"
+#include "Operand.hpp"
+#include "OperandFactory.hpp"
 
 
 void test(int a)
