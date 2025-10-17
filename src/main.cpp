@@ -47,12 +47,27 @@ void    open_file(const char *av)
         test_f();
     }
 }
-template <typename T>
+
 void    open_term(void)
 {
+    OperandFactory factory;
+
+    const IOperand* a = factory.createOperand(Int8, "500");
+    const IOperand* b = factory.createOperand(Int8, "5");
+
+    const IOperand *c = a->operator+(*b);
+    const IOperand* result = *a + *b;  // ou a->operator+(*b);
+
+    std::cout << a->toString() << " + " << b->toString() << " = " << result->toString() << std::endl;
+    std::cout << a->toString() << " + " << b->toString() << " = " << c->toString() << std::endl;
+
+    delete a;
+    delete b;
+    delete result;
+
     std::string line = "";
     int i = 0;
-    std::stack<T> my_stack;
+    std::stack<IOperand *> my_stack;
     while (getline(std::cin, line, '\n'))
     {
         // std::cout << line << std::endl;
@@ -70,7 +85,7 @@ int main(int ac, char **av)
         if (ac == 2)
             open_file(av[1]);
         else if (ac == 1)
-            open_term<IOperand *>();
+            open_term();
         else
             throw TooManyParams();
     }

@@ -1,11 +1,14 @@
 #include "Operand.hpp"
 #include <iostream>
+#include "OperandFactory.hpp"
 
 template<typename Unit, eOperandType Type>
 Operand<Unit, Type>::Operand(std::string const &value)
 {
-    _value = static_cast<uint>(std::stod(value));
+    //add verif to check overflow
+    _value = static_cast<Unit>(std::stod(value));
     _str = value;
+    std::cout << "check ici : " << value << " | " << this->getPrecision() << std::endl;
 }
 
 template<typename Unit, eOperandType Type>
@@ -35,32 +38,39 @@ IOperand const * Operand<Unit, Type>::operator+( IOperand const & rhs ) const //
     if (this->getPrecision() < rhs.getPrecision())
         type = rhs.getType();
 
-    result = std::stod(this->toString()) + std::stod(rhs.toString());
-    // if (result < std::stod(this->toString()) && result < std::stod(rhs.toString()))
-    return (createOperand(type, std::to_string(result)));
+    result = std::stod(this->toString()) + std::stod(rhs.toString()); //voir overflow
+
+    OperandFactory factory;
+    return (factory.createOperand(type, std::to_string(result)));
 }
 
-template<typename Unit, eOperandType Type>
-IOperand const * Operand<Unit, Type>::operator-( IOperand const & rhs ) const // Difference
-{
-    double result;
-    eOperandType type = this->getType();
+template class Operand<int8_t, Int8>;
+template class Operand<short, Int16>;
+template class Operand<int, Int32>;
+template class Operand<float, Float>;
+template class Operand<double, Double>;
 
-    if (this->getPrecision() < rhs.getPrecision())
-        type = rhs.getType();
+// template<typename Unit, eOperandType Type>
+// IOperand const * Operand<Unit, Type>::operator-( IOperand const & rhs ) const // Difference
+// {
+//     double result;
+//     eOperandType type = this->getType();
 
-    result = std::stod(this->toString()) - std::stod(rhs.toString());
-    return (createOperand(type, std::to_string(result)));
-}
+//     if (this->getPrecision() < rhs.getPrecision())
+//         type = rhs.getType();
 
-template<typename Unit, eOperandType Type>
-IOperand const * Operand<Unit, Type>::operator*( IOperand const & rhs ) const // Product
-{}
+//     result = std::stod(this->toString()) - std::stod(rhs.toString());
+//     return (createOperand(type, std::to_string(result)));
+// }
 
-template<typename Unit, eOperandType Type>
-IOperand const * Operand<Unit, Type>::operator/( IOperand const & rhs ) const // Quotient
-{}
+// template<typename Unit, eOperandType Type>
+// IOperand const * Operand<Unit, Type>::operator*( IOperand const & rhs ) const // Product
+// {}
 
-template<typename Unit, eOperandType Type>
-IOperand const * Operand<Unit, Type>::operator%( IOperand const & rhs ) const // Modulo
-{}
+// template<typename Unit, eOperandType Type>
+// IOperand const * Operand<Unit, Type>::operator/( IOperand const & rhs ) const // Quotient
+// {}
+
+// template<typename Unit, eOperandType Type>
+// IOperand const * Operand<Unit, Type>::operator%( IOperand const & rhs ) const // Modulo
+// {}
