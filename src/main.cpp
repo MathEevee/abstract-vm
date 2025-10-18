@@ -50,20 +50,27 @@ void    open_file(const char *av)
 
 void    open_term(void)
 {
-    OperandFactory factory;
+    try {
 
-    const IOperand* a = factory.createOperand(Int8, "500");
-    const IOperand* b = factory.createOperand(Int8, "5");
-
-    const IOperand *c = a->operator+(*b);
-    const IOperand* result = *a + *b;  // ou a->operator+(*b);
-
-    std::cout << a->toString() << " + " << b->toString() << " = " << result->toString() << std::endl;
-    std::cout << a->toString() << " + " << b->toString() << " = " << c->toString() << std::endl;
-
-    delete a;
-    delete b;
-    delete result;
+        OperandFactory factory;
+        
+        const IOperand* a = factory.createOperand(Int16, "-32768");
+        const IOperand* b = factory.createOperand(Int16, "32767");
+        
+        const IOperand *c = a->operator+(*b);
+        const IOperand* result = *a + *b;  // ou a->operator+(*b);
+        
+        std::cout << a->toString() << " + " << b->toString() << " = " << result->toString() << std::endl;
+        std::cout << a->toString() << " + " << b->toString() << " = " << c->toString() << std::endl;
+        
+        delete a;
+        delete b;
+        delete result;
+    }
+    catch (const AVMExceptions &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
 
     std::string line = "";
     int i = 0;
