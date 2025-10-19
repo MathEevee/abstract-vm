@@ -1,6 +1,8 @@
 #ifndef OPERAND_HPP
 #define OPERAND_HPP
 
+#include "OperandFactory.hpp"
+
 template<typename Unit, eOperandType Type>
 class Operand : public IOperand
 {
@@ -23,6 +25,7 @@ class Operand : public IOperand
         // IOperand const * operator%( IOperand const & rhs ) const; // Modulo
 
         std::string const & toString( void ) const; // String representation of the instance
+
 
 };
     

@@ -1,5 +1,8 @@
 #include <iostream>
 #include <fstream>
+#include <string>
+#include <limits>
+#include <climits>
 #include <stack>
 #include "IOperand.hpp"
 #include "MyExceptions.hpp"
@@ -54,13 +57,13 @@ void    open_term(void)
 
         OperandFactory factory;
         
-        const IOperand* a = factory.createOperand(Int16, "-32768");
-        const IOperand* b = factory.createOperand(Int16, "32767");
+        const IOperand* a = factory.createOperand(Float, std::to_string(FLT_MAX + FLT_MAX));
+        const IOperand* b = factory.createOperand(Float, "-340282346638528859811704183484516925443");
         
         const IOperand *c = a->operator+(*b);
         const IOperand* result = *a + *b;  // ou a->operator+(*b);
         
-        std::cout << a->toString() << " + " << b->toString() << " = " << result->toString() << std::endl;
+        // std::cout << a->toString() << " + " << b->toString() << " = " << result->toString() << std::endl;
         std::cout << a->toString() << " + " << b->toString() << " = " << c->toString() << std::endl;
         
         delete a;

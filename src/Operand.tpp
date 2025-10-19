@@ -1,6 +1,5 @@
 #include "Operand.hpp"
-#include <iostream>
-#include "OperandFactory.hpp"
+#include "utils.hpp"
 
 template<typename Unit, eOperandType Type>
 Operand<Unit, Type>::Operand(std::string const &value)
@@ -8,6 +7,7 @@ Operand<Unit, Type>::Operand(std::string const &value)
     //add verif to check overflow
     _value = static_cast<Unit>(std::stod(value));
     _str = value;
+    checkRange(Type, _str);
     std::cout << "check ici : " << value << " | " << this->getPrecision() << std::endl;
 }
 

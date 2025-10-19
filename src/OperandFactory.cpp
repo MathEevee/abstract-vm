@@ -1,53 +1,6 @@
 #include "OperandFactory.hpp"
 #include "Operand.hpp"
-#include "MyExceptions.hpp"
-
-
-
-void    OperandFactory::checkRange(eOperandType type, std::string const &value) const
-{
-    switch (type)
-    {
-        case Int8:
-        {
-            if (value.length() >= 4)
-            {
-                if (value[0] == '-' && value > "-128")
-                    throw UnderflowException();
-            }
-            else if (value.length() >= 3 && value > "127")
-                throw OverflowException();
-        }
-        case Int16:
-        {
-            if (value.length() >= 6)
-            {
-                if (value[0] == '-' && value > "-32768")
-                    throw UnderflowException();
-            }
-            else if (value.length() >= 5 && value > "32767")
-                throw OverflowException();
-        }
-        case Int32:
-        {
-            if (value.length() >= 11)
-            {
-                if (value[0] == '-' && value > "-2147483648")
-                    throw UnderflowException();
-            }
-            else if (value.length() >= 10 && value > "2147483647")
-                throw OverflowException();
-        }
-        case Float:
-        {
-
-        }
-        case Double:
-        {
-
-        }
-    }
-}
+#include "utils.hpp"
 
 IOperand const *OperandFactory::createOperand(eOperandType type, std::string const &value) const
 {
@@ -78,8 +31,6 @@ IOperand const *OperandFactory::createOperand(eOperandType type, std::string con
             checkRange(type, value);
             return (new Operand<double, Double>(value));
         }
-        default:
-            throw LexicalErrorException();
     }
 }
 
