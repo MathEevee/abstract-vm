@@ -16,7 +16,7 @@ class Operand : public IOperand
 
         IOperand const * operator+( IOperand const & rhs ) const; // Sum
 
-        // IOperand const * operator-( IOperand const & rhs ) const; // Difference
+        IOperand const * operator-( IOperand const & rhs ) const; // Difference
 
         // IOperand const * operator*( IOperand const & rhs ) const; // Product
 

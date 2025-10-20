@@ -8,6 +8,7 @@
 #include "MyExceptions.hpp"
 #include "Operand.hpp"
 #include "OperandFactory.hpp"
+#include "Utils.hpp"
 
 
 void test(int a)
@@ -35,8 +36,6 @@ void test_f()
     }
 }
 
-
-
 void    open_file(const char *av)
 {
     std::ifstream input;
@@ -57,8 +56,8 @@ void    open_term(void)
 
         OperandFactory factory;
         
-        const IOperand* a = factory.createOperand(Float, std::to_string(FLT_MAX + FLT_MAX));
-        const IOperand* b = factory.createOperand(Float, "-340282346638528859811704183484516925443");
+        const IOperand* a = factory.createOperand(Float, std::to_string(3.4028235e+38));
+        const IOperand* b = factory.createOperand(Float, std::to_string(0));
         
         const IOperand *c = a->operator+(*b);
         const IOperand* result = *a + *b;  // ou a->operator+(*b);
