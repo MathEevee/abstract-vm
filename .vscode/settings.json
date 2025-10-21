@@ -57,6 +57,8 @@
         "streambuf": "cpp",
         "text_encoding": "cpp",
         "cinttypes": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "regex": "cpp",
+        "bitset": "cpp"
     }
 }

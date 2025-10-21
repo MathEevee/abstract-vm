@@ -2,6 +2,9 @@
 #define OPERAND_HPP
 
 #include "OperandFactory.hpp"
+#include "MyExceptions.hpp"
+
+
 
 template<typename Unit, eOperandType Type>
 class Operand : public IOperand
@@ -18,15 +21,13 @@ class Operand : public IOperand
 
         IOperand const * operator-( IOperand const & rhs ) const; // Difference
 
-        // IOperand const * operator*( IOperand const & rhs ) const; // Product
+        IOperand const * operator*( IOperand const & rhs ) const; // Product
 
-        // IOperand const * operator/( IOperand const & rhs ) const; // Quotient
+        IOperand const * operator/( IOperand const & rhs ) const; // Quotient
 
-        // IOperand const * operator%( IOperand const & rhs ) const; // Modulo
+        IOperand const * operator%( IOperand const & rhs ) const; // Modulo
 
         std::string const & toString( void ) const; // String representation of the instance
-
-
 };
     
 #include "Operand.tpp"

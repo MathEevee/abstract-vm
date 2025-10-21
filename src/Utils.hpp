@@ -8,7 +8,6 @@
 #include <iostream>
 #include "IOperand.hpp"
 
-
 void            checkRange(eOperandType type, std::string const &value);
 
 

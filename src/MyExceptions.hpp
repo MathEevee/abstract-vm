@@ -1,9 +1,12 @@
+#ifndef MYEXCEPTIONS_HPP
+#define MYEXCEPTIONS_HPP
+
 #include "Exceptions.hpp"
 
-class ModNullException : public AVMExceptions
+class ModDivNullException : public AVMExceptions
 {
     public :
-        ModNullException();
+        ModDivNullException();
 };
 
 class PopEmptyStackException : public AVMExceptions
@@ -71,3 +74,5 @@ class TooManyParams : public AVMExceptions
     public :
         TooManyParams();
 };
+
+#endif

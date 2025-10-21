@@ -1,6 +1,6 @@
 #include "MyExceptions.hpp"
 
-ModNullException::ModNullException() : AVMExceptions("Error: Division or modulo by zero")
+ModDivNullException::ModDivNullException() : AVMExceptions("Error: Division or modulo by zero")
 {}
 
 PopEmptyStackException::PopEmptyStackException() : AVMExceptions("Error: Cannot pop from an empty stack")

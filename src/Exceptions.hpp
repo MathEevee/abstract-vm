@@ -1,3 +1,6 @@
+#ifndef EXCEPTIONS_HPP
+#define EXCEPTIONS_HPP
+
 #include <exception>
 #include <iostream>
 
@@ -10,3 +13,5 @@ class AVMExceptions : public std::exception {
     private :
         std::string _msg;
 };
+
+#endif

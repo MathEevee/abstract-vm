@@ -5,7 +5,10 @@ template<typename Unit, eOperandType Type>
 Operand<Unit, Type>::Operand(std::string const &value)
 {
     _value = static_cast<Unit>(std::stod(value));
-    _str = value;
+    if (Type == Int8 || Type == Int16 || Type == Int32)
+        _str = std::to_string(static_cast<int>(_value));
+    else
+        _str = value;
 }
 
 template<typename Unit, eOperandType Type>
@@ -58,20 +61,56 @@ IOperand const * Operand<Unit, Type>::operator-( IOperand const & rhs ) const //
     return (factory.createOperand(type, std::to_string(result)));
 }
 
+
+template<typename Unit, eOperandType Type>
+IOperand const * Operand<Unit, Type>::operator*( IOperand const & rhs ) const // Product
+{
+    double result;
+    eOperandType type = this->getType();
+
+    if (this->getPrecision() < rhs.getPrecision())
+        type = rhs.getType();
+    result = std::stod(this->toString()) * std::stod(rhs.toString());
+    OperandFactory factory;
+    return (factory.createOperand(type, std::to_string(result)));
+}
+
+template<typename Unit, eOperandType Type>
+IOperand const * Operand<Unit, Type>::operator/( IOperand const & rhs ) const // Quotient
+{
+    double result;
+    eOperandType type = this->getType();
+
+    if (this->getPrecision() < rhs.getPrecision())
+        type = rhs.getType();
+    if (std::stod(rhs.toString()) == 0)
+        throw ModDivNullException();
+    result = std::stod(this->toString()) / std::stod(rhs.toString());
+    OperandFactory factory;
+    return (factory.createOperand(type, std::to_string(result)));
+}
+
+template<typename Unit, eOperandType Type>
+IOperand const * Operand<Unit, Type>::operator%( IOperand const & rhs ) const // Modulo
+{
+    double result;
+    eOperandType type = this->getType();
+
+    if (this->getPrecision() < rhs.getPrecision())
+        type = rhs.getType();
+    if (std::stod(rhs.toString()) == 0)
+        throw ModDivNullException();
+    if (type == Int8 || type == Int16 || type == Int32)
+        result = static_cast<long long>(std::stod(this->toString())) % static_cast<long long>(std::stod(rhs.toString()));
+    else
+        result = std::fmod(std::stod(this->toString()), std::stod(rhs.toString()));
+    // result = std::stod(this->toString()) % std::stod(rhs.toString());
+    OperandFactory factory;
+    return (factory.createOperand(type, std::to_string(result)));
+}
+
 template class Operand<int8_t, Int8>;
-template class Operand<short, Int16>;
+template class Operand<int16_t, Int16>;
 template class Operand<int, Int32>;
 template class Operand<float, Float>;
 template class Operand<double, Double>;
-
-// template<typename Unit, eOperandType Type>
-// IOperand const * Operand<Unit, Type>::operator*( IOperand const & rhs ) const // Product
-// {}
-
-// template<typename Unit, eOperandType Type>
-// IOperand const * Operand<Unit, Type>::operator/( IOperand const & rhs ) const // Quotient
-// {}
-
-// template<typename Unit, eOperandType Type>
-// IOperand const * Operand<Unit, Type>::operator%( IOperand const & rhs ) const // Modulo
-// {}
