@@ -14,10 +14,5 @@ std::vector<std::string>    ParseLine(std::string line)
     }
     args.push_back(line.substr(start));
 
-    for (std::vector<std::string>::iterator it = args.begin(); it != args.end(); it++)
-    {
-        std::cout << "verif " << *it << std::endl;
-    }
-
-    return args;
+    return (args);
 }

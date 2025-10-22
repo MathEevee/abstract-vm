@@ -5,7 +5,7 @@ OBJDIRB		:= ./obj_bonus
 NAME		:= avm
 NAME_BONUS	:= avm_bonus
 CC			:= c++
-SRCS 		:= main.cpp Exceptions.cpp MyExceptions.cpp OperandFactory.cpp Utils.cpp Parser.cpp
+SRCS 		:= main.cpp Exceptions.cpp MyExceptions.cpp OperandFactory.cpp Utils.cpp Parser.cpp StackOperand.cpp
 OBJS		:= $(addprefix $(OBJDIR)/, $(SRCS:.cpp=.o))
 OBJS_BONUS	:= $(addprefix $(OBJDIRB)/, $(SRCS:.cpp=_bonus.o))
 

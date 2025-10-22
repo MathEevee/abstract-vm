@@ -12,6 +12,9 @@
 // #define ASSERT_DF R"(^(assert) (\w+)\(([-+]?\d+(\.\d*)?([eE][-+]?\d+)?)\)$)"
 // #define ASSERT_INT R"(^(assert) (\w+)\(([-+]?\d+)\)$)"
 
+#define INT_FORMAT 
+#define OTHER_FORMAT 
+
 // enum Instruction {
 //     comment,
 //     push,

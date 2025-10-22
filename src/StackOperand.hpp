@@ -2,24 +2,31 @@
 #define STACKOPERAND_HPP
 
 #include <stack>
+#include <vector>
 #include "IOperand.hpp"
+#include "Operand.hpp"
 
 class StackOperand {
     private :
-        std::stack<IOperand> stack;
+        std::stack<const IOperand *> _stack;
+        void     comment(std::vector<std::string> args);
+        void     push(std::stack<IOperand> stack, std::vector<std::string> args);
+        void     pop(std::stack<IOperand> stack, std::vector<std::string> args);
+        void     dump(std::stack<IOperand> stack, std::vector<std::string> args);
+        void     assert(std::stack<IOperand> stack, std::vector<std::string> args);
+        void     add(std::stack<IOperand> stack, std::vector<std::string> args);
+        void     sub(std::stack<IOperand> stack, std::vector<std::string> args);
+        void     mul(std::stack<IOperand> stack, std::vector<std::string> args);
+        void     div(std::stack<IOperand> stack, std::vector<std::string> args);
+        void     mod(std::stack<IOperand> stack, std::vector<std::string> args);
+        void     print(std::stack<IOperand> stack, std::vector<std::string> args);
+        void     exit(std::stack<IOperand> stack, std::vector<std::string> args);
     public :
-        //void     comment(std::stack<IOperand> stack, std::vector<std::string> args),
-        //void     push(std::stack<IOperand> stack, std::vector<std::string> args),
-        //void     pop(std::stack<IOperand> stack, std::vector<std::string> args),
-        //void     dump(std::stack<IOperand> stack, std::vector<std::string> args),
-        //void     assert(std::stack<IOperand> stack, std::vector<std::string> args),
-        //void     add(std::stack<IOperand> stack, std::vector<std::string> args),
-        //void     sub(std::stack<IOperand> stack, std::vector<std::string> args),
-        //void     mul(std::stack<IOperand> stack, std::vector<std::string> args),
-        //void     div(std::stack<IOperand> stack, std::vector<std::string> args),
-        //void     mod(std::stack<IOperand> stack, std::vector<std::string> args),
-        //void     print(std::stack<IOperand> stack, std::vector<std::string> args),
-        //void     exit(std::stack<IOperand> stack, std::vector<std::string> args)
+        StackOperand();
+        void        checkOp(std::vector<std::string> args);
+        void        checkSyn(std::vector<std::string> args);
+
+
 };
 
 #endif
