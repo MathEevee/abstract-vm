@@ -6,11 +6,11 @@
 #include <string>
 #include <sstream>
 
-#define PUSH_DF R"(^(push) (\w+)\(([-+]?\d+(\.\d*)?([eE][-+]?\d+)?)\)$)"
-#define PUSH_INT R"(^(push) (\w+)\(([-+]?\d+)\)$)"
+// #define PUSH_DF R"(^(push) (\w+)\(([-+]?\d+(\.\d*)?([eE][-+]?\d+)?)\)$)"
+// #define PUSH_INT R"(^(push) (\w+)\(([-+]?\d+)\)$)"
 
-#define ASSERT_DF R"(^(assert) (\w+)\(([-+]?\d+(\.\d*)?([eE][-+]?\d+)?)\)$)"
-#define ASSERT_INT R"(^(assert) (\w+)\(([-+]?\d+)\)$)"
+// #define ASSERT_DF R"(^(assert) (\w+)\(([-+]?\d+(\.\d*)?([eE][-+]?\d+)?)\)$)"
+// #define ASSERT_INT R"(^(assert) (\w+)\(([-+]?\d+)\)$)"
 
 // enum Instruction {
 //     comment,

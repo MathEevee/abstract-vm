@@ -10,6 +10,7 @@
 #include "OperandFactory.hpp"
 #include "Utils.hpp"
 #include "Parser.hpp"
+#include "StackOperand.hpp"
 
 void test(int a)
 {
@@ -44,6 +45,7 @@ void    open_file(const char *av)
         throw CantOpenFile();
     std::string line = "";
     std::vector<std::string> parse_line;
+    StackOperand my_stack;
     while (getline(input, line, '\n'))
     {
         try {
