@@ -5,6 +5,9 @@
 #include <regex>
 #include <string>
 #include <sstream>
+#include "IOperand.hpp"
+#include "MyExceptions.hpp"
+
 
 // #define PUSH_DF R"(^(push) (\w+)\(([-+]?\d+(\.\d*)?([eE][-+]?\d+)?)\)$)"
 // #define PUSH_INT R"(^(push) (\w+)\(([-+]?\d+)\)$)"
@@ -12,25 +15,33 @@
 // #define ASSERT_DF R"(^(assert) (\w+)\(([-+]?\d+(\.\d*)?([eE][-+]?\d+)?)\)$)"
 // #define ASSERT_INT R"(^(assert) (\w+)\(([-+]?\d+)\)$)"
 
-#define INT_FORMAT 
-#define OTHER_FORMAT 
+// #define INT_PATTERN R"(^\w+ (int(8|16|32))\((-?\d+)\)$)"
 
-// enum Instruction {
-//     comment,
-//     push,
-//     pop,
-//     dump,
-//     assert,
-//     add,
-//     sub,
-//     mul,
-//     div,
-//     mod,
-//     print,
-//     exit
-// };
+// #define OTHER_PATTERN R"(^\w+ (float|double)\((-?\d+(?:\.\d+)?(?:[eE][-+]?\d+)?|\.\d+(?:[eE][-+]?\d+)?)\)$)"
 
-std::vector<std::string>            ParseLine(std::string line);
-std::map<std::regex, std::string>   RegexGenerator();
+// #define VALUE_PATTERN R"(^\w+ ((?:int(8|16|32))\((-?\d+)\)|(float|double)\((-?\d+(?:\.\d+)?(?:[eE][-+]?\d+)?|\.\d+(?:[eE][-+]?\d+)?)\))$)"
+
+enum Instruction {
+    Comment,
+    Push,
+    Pop,
+    Dump,
+    Assert,
+    Add,
+    Sub,
+    Mul,
+    Div,
+    Mod,
+    Print,
+    Exit,
+	UNKNOWN
+};
+
+
+std::vector<std::string>	ParseLine(std::string line);
+eOperandType				parseType(const std::string &cmd);
+Instruction					parseInstruction(const std::string &cmd);
+Instruction					checkOther(bool in_term, std::vector<std::string> args, Instruction instr);
+
 
 #endif

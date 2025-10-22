@@ -50,5 +50,9 @@ void    checkRange(eOperandType type, std::string const &value)
             strcmpRange(-std::numeric_limits<double>::max(), std::numeric_limits<double>::max(), value);
             break;
         }
+        default:
+        {
+            throw LexicalErrorException();
+        }
     }
 }

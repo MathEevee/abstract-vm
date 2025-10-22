@@ -1,18 +1,96 @@
 #include "Parser.hpp"
 
+Instruction parseInstruction(const std::string &cmd)
+{
+    static const std::array<std::pair<const char*, Instruction>, 12> table = {{
+    {"comment", Comment},
+    {"push", Push},
+    {"pop", Pop},
+    {"dump", Dump},
+    {"assert", Assert},
+    {"add", Add},
+    {"sub", Sub},
+    {"mul", Mul},
+    {"div", Div},
+    {"mod", Mod},
+    {"print", Print},
+    {"exit", Exit}}};
+
+    for (auto &[name, instr] : table)
+    {
+        if (cmd == name)
+            return instr;
+    }
+    return UNKNOWN;
+}
+
+Instruction checkOther(bool in_term, std::vector<std::string> args, Instruction instr)
+{
+    if (in_term == true && instr == Exit)
+        throw NotAnInstructionException();
+    std::cout << "--------------------------------------" << std::endl;
+    for (std::vector<std::string>::iterator it = args.begin(); it != args.end(); it++)
+    {
+        std::cout << "verif : |" << *it << "|" << std::endl;
+    }
+    std::cout << "--------------------------------------" << std::endl;
+    return instr; //change that
+}
+
+eOperandType parseType(const std::string &cmd)
+{
+    static const std::array<std::pair<const char*, eOperandType>, 5> typeTable = {{
+        {"int8",  Int8},
+        {"int16", Int16},
+        {"int32", Int32},
+        {"float", Float},
+        {"double", Double}
+    }};
+    for (auto &[name, type] : typeTable)
+    {
+        if (cmd == name)
+            return type;
+    }
+    return DOESNOTEXIST;
+}
+
+
+
 std::vector<std::string>    ParseLine(std::string line)
 {
     std::vector<std::string> args;
-    size_t start = 0;
-    size_t end = line.find(' ');
+    std::string              str = "";
+    bool                     is_com = false;
 
-    while (end != std::string::npos)
+    for (std::string::iterator it = line.begin(); it != line.end(); it++)
     {
-        args.push_back(line.substr(start, end - start));
-        start = end + 1;
-        end = line.find(' ', start);
+        if (*it == ';' && is_com == false)
+        {
+            if (str != "")
+                args.push_back(str);
+            if (*(it + 1) == ';' && (*it) == ';')
+            {
+                args.push_back(";;");
+                it += 2;
+            }
+            else
+                is_com = true;
+            str = "";
+        }
+        if (is_com == false && *it == ' ')
+        {
+            if (str != "")
+                args.push_back(str);
+            str = "";
+        }
+        if (it == line.end())
+            break;
+        if (is_com == false && *it == ' ')
+            continue;
+        str += *it;
     }
-    args.push_back(line.substr(start));
+    if (str != "")
+        args.push_back(str);
 
     return (args);
 }

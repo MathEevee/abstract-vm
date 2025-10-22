@@ -50,8 +50,7 @@ void    open_file(const char *av)
     {
         try {
             parse_line = ParseLine(line);
-            my_stack.checkOp(parse_line);
-
+            my_stack.checkOp(parse_line, false);
         }
         catch (const AVMExceptions &e)
         {
@@ -73,7 +72,8 @@ void    open_term(void)
         const IOperand *result_mult = a->operator*(*b);
         
         std::cout << a->toString() << " * " << b->toString() << " = " << result_mult->toString() << std::endl;
-        
+
+            
         delete a;
         delete b;
         delete result_mult;
@@ -82,14 +82,24 @@ void    open_term(void)
     {
         std::cerr << e.what() << std::endl;
     }
-
+        
+    std::vector<std::string> parse_line;
+    StackOperand my_stack;
     std::string line = "";
     int i = 0;
     while (getline(std::cin, line, '\n'))
     {
+        try {
+            parse_line = ParseLine(line);
+            my_stack.checkOp(parse_line, true);
+        }
+        catch (const AVMExceptions &e)
+        {
+            e.handle();
+            continue;
+        }
         i++;
     }
-
 }
 
 int main(int ac, char **av)

@@ -26,7 +26,12 @@ IOperand const *OperandFactory::createOperand(eOperandType type, std::string con
             checkRange(type, value);
             return (new Operand<float, Float>(value));
         }
-        case Double:
+        /*case Double:
+        {
+            checkRange(type, value);
+            return (new Operand<double, Double>(value));
+        }*/
+        default:
         {
             checkRange(type, value);
             return (new Operand<double, Double>(value));

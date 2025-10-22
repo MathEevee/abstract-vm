@@ -5,6 +5,7 @@
 #include <vector>
 #include "IOperand.hpp"
 #include "Operand.hpp"
+#include "Parser.hpp"
 
 class StackOperand {
     private :
@@ -23,7 +24,7 @@ class StackOperand {
         void     exit(std::stack<IOperand> stack, std::vector<std::string> args);
     public :
         StackOperand();
-        void        checkOp(std::vector<std::string> args);
+        void        checkOp(std::vector<std::string> args, bool in_term);
         void        checkSyn(std::vector<std::string> args);
 
 
