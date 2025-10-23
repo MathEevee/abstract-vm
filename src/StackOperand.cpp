@@ -3,6 +3,12 @@
 StackOperand::StackOperand()
 {}
 
+StackOperand::~StackOperand()
+{
+    while (!this->_stack.empty())
+        this->_stack.pop();
+}
+
 void     StackOperand::comment(std::vector<std::string> args)
 {
     OperandFactory factory;
@@ -11,14 +17,67 @@ void     StackOperand::comment(std::vector<std::string> args)
     this->_stack.push(a);
 }
 
+void    StackOperand::execInstr(std::vector<std::string> args, bool in_term, Instruction instr)
+{
+    switch (instr)
+    {
+        case Push:
+            break;
+        case Pop:
+            break;
+        case Dump:
+            break;
+        case Assert:
+            break;
+        case Add:
+            break;
+        case Sub:
+            break;
+        case Mul:
+            break;
+        case Div:
+            break;
+        case Mod:
+            break;
+        case Print:
+            break;
+        case Comment:
+            break;
+        case Exit:
+            std::exit(0);
+        default:
+        {
+            //throw
+        }
+    }
+}
+
+
 void     StackOperand::checkOp(std::vector<std::string> args, bool in_term)
 {
-    (void) args;
+    if (args.empty())
+        return ;
 
-    if (args[0].empty())
-        return;
-
-    Instruction tmp = parseInstruction(args[0]);
-    tmp = checkOther(in_term, args, tmp);
+    Instruction tmp = UNKNOWN;
+    for (std::vector<std::string>::iterator it = args.begin(); it != args.end(); it++)
+    {
+        if (args.empty())
+            break;
+        tmp = parseInstruction(*it);
+        tmp = checkOther(in_term, args, tmp);
+        if (tmp == Comment || Exit)
+        {
+            execInstr(args, in_term, tmp);
+            std::cout << "is comm" << std::endl;
+            break;
+        }
+        it = args.erase(it);
+        execInstr(args, in_term, tmp);
+        if (tmp == Exit)
+            std::exit(0);
+        std::cout << "args = " << *it << "| instr = " << tmp << std::endl;
+        // std::cout << *it << std::endl;
+    }
+    // tmp = checkOther(in_term, args, tmp);
 }
 

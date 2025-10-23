@@ -5,6 +5,7 @@
 #include <regex>
 #include <string>
 #include <sstream>
+#include <array>
 #include "IOperand.hpp"
 #include "MyExceptions.hpp"
 

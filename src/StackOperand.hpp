@@ -24,8 +24,9 @@ class StackOperand {
         void     exit(std::stack<IOperand> stack, std::vector<std::string> args);
     public :
         StackOperand();
+        ~StackOperand();
         void        checkOp(std::vector<std::string> args, bool in_term);
-        void        checkSyn(std::vector<std::string> args);
+        void        execInstr(std::vector<std::string> args, bool in_term, Instruction instr);
 
 
 };

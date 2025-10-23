@@ -16,24 +16,41 @@ Instruction parseInstruction(const std::string &cmd)
     {"print", Print},
     {"exit", Exit}}};
 
-    for (auto &[name, instr] : table)
+    for (auto &pair : table)
     {
+        const std::string &name = pair.first;
+        Instruction instr = pair.second;
         if (cmd == name)
-            return instr;
+            return (instr);
     }
-    return UNKNOWN;
+    return (UNKNOWN);
 }
 
 Instruction checkOther(bool in_term, std::vector<std::string> args, Instruction instr)
 {
     if (in_term == true && instr == Exit)
         throw NotAnInstructionException();
-    std::cout << "--------------------------------------" << std::endl;
-    for (std::vector<std::string>::iterator it = args.begin(); it != args.end(); it++)
+    else if (in_term == false && args[0][0] == ';')
+        return (Comment);
+    else if (in_term == true && args[0] == ";;")
     {
-        std::cout << "verif : |" << *it << "|" << std::endl;
+        if (args[1].empty())
+            return (Exit);
+        if (!args[1].empty() && args[1][0] == ';')
+        {
+            std::cout << "la ?" << std::endl;
+            return (Comment);
+        }
+        else if (!args[1].empty())
+            throw NotAnInstructionException();
     }
-    std::cout << "--------------------------------------" << std::endl;
+    // std::cout << "--------------------------------------" << std::endl;
+    // for (std::vector<std::string>::iterator it = args.begin(); it != args.end(); it++)
+    // {
+    //     // std::cout << "verif : |" << *it << "|" << std::endl;
+    //     std::cout << "verif args : |" << *it << "|" << std::endl;
+    // }
+    // std::cout << "--------------------------------------" << std::endl;
     return instr; //change that
 }
 
@@ -46,12 +63,14 @@ eOperandType parseType(const std::string &cmd)
         {"float", Float},
         {"double", Double}
     }};
-    for (auto &[name, type] : typeTable)
+    for (auto &pair : typeTable)
     {
+        const std::string &name = pair.first;
+        eOperandType type = pair.second;
         if (cmd == name)
-            return type;
+            return (type);
     }
-    return DOESNOTEXIST;
+    return (DOESNOTEXIST);
 }
 
 

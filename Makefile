@@ -9,7 +9,7 @@ SRCS 		:= main.cpp Exceptions.cpp MyExceptions.cpp OperandFactory.cpp Utils.cpp 
 OBJS		:= $(addprefix $(OBJDIR)/, $(SRCS:.cpp=.o))
 OBJS_BONUS	:= $(addprefix $(OBJDIRB)/, $(SRCS:.cpp=_bonus.o))
 
-CFLAGS	:= -Wextra -Wall -Werror
+CFLAGS	:= -Wextra -Wall -Werror -g
 
 
 all: $(NAME)
