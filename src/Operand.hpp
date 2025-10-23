@@ -14,6 +14,7 @@ class Operand : public IOperand
         std::string     _str;
     public :
         Operand(std::string const &value);
+        
         int getPrecision( void ) const; // Precision of the type of the instance
         eOperandType getType( void ) const; // Type of the instance
 

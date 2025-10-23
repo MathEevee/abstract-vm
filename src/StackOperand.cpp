@@ -3,22 +3,28 @@
 StackOperand::StackOperand()
 {}
 
+
 StackOperand::~StackOperand()
 {
-    while (!this->_stack.empty())
-        this->_stack.pop();
+    while (!_stack.empty())
+    {
+        delete _stack.top();
+        _stack.pop();
+    }
 }
 
 void     StackOperand::comment(std::vector<std::string> args)
 {
-    OperandFactory factory;
+    // OperandFactory factory;
     (void) args;
-    const IOperand* a = factory.createOperand(Float, std::to_string(841564512135143.15614685120));
-    this->_stack.push(a);
+    // const IOperand* a = factory.createOperand(Float, std::to_string(841564512135143.15614685120));
+    // this->_stack.push(a);
 }
 
 void    StackOperand::execInstr(std::vector<std::string> args, bool in_term, Instruction instr)
 {
+    (void) args;
+    (void) in_term;
     switch (instr)
     {
         case Push:
@@ -65,7 +71,7 @@ void     StackOperand::checkOp(std::vector<std::string> args, bool in_term)
             break;
         tmp = parseInstruction(*it);
         tmp = checkOther(in_term, args, tmp);
-        if (tmp == Comment || Exit)
+        if (tmp == Comment || tmp == Exit)
         {
             execInstr(args, in_term, tmp);
             std::cout << "is comm" << std::endl;

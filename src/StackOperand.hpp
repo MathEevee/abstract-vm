@@ -6,22 +6,27 @@
 #include "IOperand.hpp"
 #include "Operand.hpp"
 #include "Parser.hpp"
+#include <iostream>
+#include <string>
 
 class StackOperand {
     private :
-        std::stack<const IOperand *> _stack;
-        void     comment(std::vector<std::string> args);
-        void     push(std::stack<IOperand> stack, std::vector<std::string> args);
-        void     pop(std::stack<IOperand> stack, std::vector<std::string> args);
-        void     dump(std::stack<IOperand> stack, std::vector<std::string> args);
-        void     assert(std::stack<IOperand> stack, std::vector<std::string> args);
-        void     add(std::stack<IOperand> stack, std::vector<std::string> args);
-        void     sub(std::stack<IOperand> stack, std::vector<std::string> args);
-        void     mul(std::stack<IOperand> stack, std::vector<std::string> args);
-        void     div(std::stack<IOperand> stack, std::vector<std::string> args);
-        void     mod(std::stack<IOperand> stack, std::vector<std::string> args);
-        void     print(std::stack<IOperand> stack, std::vector<std::string> args);
-        void     exit(std::stack<IOperand> stack, std::vector<std::string> args);
+    
+        std::stack<const IOperand *>    _stack;
+
+        void comment(std::vector<std::string> args);
+        void push(std::stack<const IOperand *> &stack, std::vector<std::string> args);
+        void pop(std::stack<const IOperand *> &stack, std::vector<std::string> args);
+        void dump(std::stack<const IOperand *> &stack, std::vector<std::string> args);
+        void assert(std::stack<const IOperand *> &stack, std::vector<std::string> args);
+        void add(std::stack<const IOperand *> &stack, std::vector<std::string> args);
+        void sub(std::stack<const IOperand *> &stack, std::vector<std::string> args);
+        void mul(std::stack<const IOperand *> &stack, std::vector<std::string> args);
+        void div(std::stack<const IOperand *> &stack, std::vector<std::string> args);
+        void mod(std::stack<const IOperand *> &stack, std::vector<std::string> args);
+        void print(std::stack<const IOperand *> &stack, std::vector<std::string> args);
+        void exit(std::stack<const IOperand *> &stack, std::vector<std::string> args);
+
     public :
         StackOperand();
         ~StackOperand();

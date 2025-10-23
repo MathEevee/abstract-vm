@@ -10,6 +10,7 @@ class AVMExceptions : public std::exception {
         const char* what() const noexcept override;
 
         void    handle() const;
+        virtual ~AVMExceptions() = 0;
     private :
         std::string _msg;
 };

@@ -40,6 +40,7 @@ void test_f()
 void    open_file(const char *av)
 {
     std::ifstream input;
+
     input.open(av);
     if (!input.is_open())
         throw CantOpenFile();
@@ -62,26 +63,26 @@ void    open_file(const char *av)
 
 void    open_term(void)
 {
-    try {
+    // try {
 
-        OperandFactory factory;
+    //     OperandFactory factory;
         
-        const IOperand* a = factory.createOperand(Int8, std::to_string(10));
-        const IOperand* b = factory.createOperand(Int8, std::to_string(50));
+    //     const IOperand* a = factory.createOperand(Int8, std::to_string(10));
+    //     const IOperand* b = factory.createOperand(Int8, std::to_string(50));
         
-        const IOperand *result_mult = a->operator*(*b);
+    //     const IOperand *result_mult = a->operator*(*b);
         
-        std::cout << a->toString() << " * " << b->toString() << " = " << result_mult->toString() << std::endl;
+    //     std::cout << a->toString() << " * " << b->toString() << " = " << result_mult->toString() << std::endl;
 
             
-        delete a;
-        delete b;
-        delete result_mult;
-    }
-    catch (const AVMExceptions &e)
-    {
-        std::cerr << e.what() << std::endl;
-    }
+    //     delete a;
+    //     delete b;
+    //     delete result_mult;
+    // }
+    // catch (const AVMExceptions &e)
+    // {
+    //     std::cerr << e.what() << std::endl;
+    // }
         
     std::vector<std::string> parse_line;
     StackOperand my_stack;
