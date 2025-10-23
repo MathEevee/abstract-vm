@@ -33,29 +33,24 @@ void test_f()
     }
     catch (const AVMExceptions &e)
     {
-        e.handle();
+        e.what();
     }
 }
 
-void    open_file(const char *av)
+void    open_file(std::ifstream &input)
 {
-    std::ifstream input;
-
-    input.open(av);
-    if (!input.is_open())
-        throw CantOpenFile();
     std::string line = "";
     std::vector<std::string> parse_line;
     StackOperand my_stack;
     while (getline(input, line, '\n'))
     {
         try {
-            parse_line = ParseLine(line);
-            my_stack.checkOp(parse_line, false);
+                parse_line = ParseLine(line);
+                my_stack.checkOp(parse_line, false);
         }
         catch (const AVMExceptions &e)
         {
-            e.handle();
+            e.what();
             continue;
         }
     }
@@ -96,7 +91,7 @@ void    open_term(void)
         }
         catch (const AVMExceptions &e)
         {
-            e.handle();
+            e.what();
             continue;
         }
         i++;
@@ -108,7 +103,14 @@ int main(int ac, char **av)
     try
     {
         if (ac == 2)
-            open_file(av[1]);
+        {
+            std::ifstream input;
+
+            input.open(av[1]);
+            if (!input.is_open())
+                throw CantOpenFile();
+            open_file(input);
+        }
         else if (ac == 1)
             open_term();
         else
@@ -116,7 +118,7 @@ int main(int ac, char **av)
     }
     catch (const AVMExceptions &e)
     {
-        e.handle();
+        std::cout << e.what() << std::endl;
     }
     return 1;
 }

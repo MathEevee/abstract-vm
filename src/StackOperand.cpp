@@ -50,7 +50,10 @@ void    StackOperand::execInstr(std::vector<std::string> args, bool in_term, Ins
         case Comment:
             break;
         case Exit:
+        {
+            std::cout << "ici ?" << std::endl;
             std::exit(0);
+        }
         default:
         {
             //throw
@@ -65,25 +68,25 @@ void     StackOperand::checkOp(std::vector<std::string> args, bool in_term)
         return ;
 
     Instruction tmp = UNKNOWN;
-    for (std::vector<std::string>::iterator it = args.begin(); it != args.end(); it++)
+    if (!args[0].empty())
     {
-        if (args.empty())
-            break;
-        tmp = parseInstruction(*it);
-        tmp = checkOther(in_term, args, tmp);
-        if (tmp == Comment || tmp == Exit)
-        {
-            execInstr(args, in_term, tmp);
-            std::cout << "is comm" << std::endl;
-            break;
-        }
-        it = args.erase(it);
-        execInstr(args, in_term, tmp);
+        tmp = parseInstruction(args[0]);
+        tmp = checkOther(in_term, args[0], tmp);
+        std::cout << args[0] << "|" << tmp << std::endl;
         if (tmp == Exit)
-            std::exit(0);
-        std::cout << "args = " << *it << "| instr = " << tmp << std::endl;
-        // std::cout << *it << std::endl;
+            return;
+        // execInstr(args, in_term, tmp);
     }
+    // std::cout << "check = " << tmp << std::endl;
+    // if (tmp == Comment || tmp == Exit)
+    // {
+    //     execInstr(args, in_term, tmp);
+    //     break;
+    // }
+    // if (args.empty())
+        // break;
+    // std::cout << "args = " << *it << "| instr = " << tmp << std::endl;
+    // std::cout << *it << std::endl;
     // tmp = checkOther(in_term, args, tmp);
 }
 

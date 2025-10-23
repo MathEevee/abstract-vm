@@ -6,13 +6,13 @@
 
 class AVMExceptions : public std::exception {
     public :
-        AVMExceptions(const std::string &msg);
+        AVMExceptions(const char *msg);
         const char* what() const noexcept override;
 
         void    handle() const;
-        virtual ~AVMExceptions() = 0;
+        virtual ~AVMExceptions();
     private :
-        std::string _msg;
+        const char* _msg;
 };
 
 #endif

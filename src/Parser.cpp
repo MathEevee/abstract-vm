@@ -26,32 +26,39 @@ Instruction parseInstruction(const std::string &cmd)
     return (UNKNOWN);
 }
 
-Instruction checkOther(bool in_term, std::vector<std::string> args, Instruction instr)
+Instruction checkOther(bool in_term, std::string args, Instruction instr)
 {
     if (in_term == true && instr == Exit)
         throw NotAnInstructionException();
-    else if (in_term == false && args[0][0] == ';')
-        return (Comment);
-    else if (in_term == true && args[0] == ";;")
+    // else if (in_term == false && args[0] == ';')
+    //     return (Comment);
+    // else if (in_term == true && args == ";;")
+    //     return (Exit);
+    // std::cout << "--------------------------------------" << std::endl;
+    /*std::string::iterator tmp;
+    bool    is_exit = false;
+    int current = 0;
+    int save = 0;
+    for (std::string::iterator it = args.begin(); it != args.end(); it++)
     {
-        if (args[1].empty())
-            return (Exit);
-        if (!args[1].empty() && args[1][0] == ';')
+        tmp = it;
+        tmp++;
+        if (*it == ';' && *tmp == ';' && is_exit == false)
         {
-            std::cout << "la ?" << std::endl;
-            return (Comment);
+            is_exit = true;
+            save = current;
         }
-        else if (!args[1].empty())
-            throw NotAnInstructionException();
-    }
-    // std::cout << "--------------------------------------" << std::endl;
-    // for (std::vector<std::string>::iterator it = args.begin(); it != args.end(); it++)
-    // {
-    //     // std::cout << "verif : |" << *it << "|" << std::endl;
-    //     std::cout << "verif args : |" << *it << "|" << std::endl;
-    // }
-    // std::cout << "--------------------------------------" << std::endl;
-    return instr; //change that
+        else if (is_exit == true && *it == ';' && save + 1 == current)
+            return (Exit);
+        else if (is_exit == true && *it == ' ')
+        {
+            current++;
+            continue;
+        }
+        current++;
+    }*/
+
+    return (instr);
 }
 
 eOperandType parseType(const std::string &cmd)
@@ -110,6 +117,5 @@ std::vector<std::string>    ParseLine(std::string line)
     }
     if (str != "")
         args.push_back(str);
-
     return (args);
 }
