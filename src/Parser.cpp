@@ -2,8 +2,7 @@
 
 Instruction parseInstruction(const std::string &cmd)
 {
-    static const std::array<std::pair<const char*, Instruction>, 12> table = {{
-    {"comment", Comment},
+    static const std::array<std::pair<const char*, Instruction>, 11> table = {{
     {"push", Push},
     {"pop", Pop},
     {"dump", Dump},
@@ -26,38 +25,23 @@ Instruction parseInstruction(const std::string &cmd)
     return (UNKNOWN);
 }
 
+
+bool checkFormats(std::string args, Instruction instr)
+{
+    (void) args;
+    (void) instr;
+    return (true);
+}
+
+
 Instruction checkOther(bool in_term, std::string args, Instruction instr)
 {
-    if (in_term == true && instr == Exit)
-        throw NotAnInstructionException();
-    // else if (in_term == false && args[0] == ';')
-    //     return (Comment);
-    // else if (in_term == true && args == ";;")
-    //     return (Exit);
-    // std::cout << "--------------------------------------" << std::endl;
-    /*std::string::iterator tmp;
-    bool    is_exit = false;
-    int current = 0;
-    int save = 0;
-    for (std::string::iterator it = args.begin(); it != args.end(); it++)
-    {
-        tmp = it;
-        tmp++;
-        if (*it == ';' && *tmp == ';' && is_exit == false)
-        {
-            is_exit = true;
-            save = current;
-        }
-        else if (is_exit == true && *it == ';' && save + 1 == current)
-            return (Exit);
-        else if (is_exit == true && *it == ' ')
-        {
-            current++;
-            continue;
-        }
-        current++;
-    }*/
-
+    if (instr == Comment)
+        return (instr);
+    if (instr == Exit && args[0] == ';')
+        return (instr);
+    if (args[0] == ';' && in_term == false)
+        return (Comment);
     return (instr);
 }
 

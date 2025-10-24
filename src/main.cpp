@@ -26,7 +26,7 @@ void test_f()
     }
     catch (const AVMExceptions &e)
     {
-        e.handle();
+        e.what();
     }
     try {
         test(a);
@@ -39,21 +39,23 @@ void test_f()
 
 void    open_file(std::ifstream &input)
 {
-    std::string line = "";
+
+    bool    exit = false;
+
     std::vector<std::string> parse_line;
     StackOperand my_stack;
+    std::string line = "";
+    int i = 0;
     while (getline(input, line, '\n'))
     {
-        try {
-                parse_line = ParseLine(line);
-                my_stack.checkOp(parse_line, false);
-        }
-        catch (const AVMExceptions &e)
-        {
-            e.what();
-            continue;
-        }
+        parse_line = ParseLine(line);
+        exit = my_stack.checkOp(parse_line, false);
+        if (exit == true)
+            break;
+        i++;
     }
+    if (exit == false)
+        throw NoExitException();
 }
 
 void    open_term(void)
@@ -78,22 +80,19 @@ void    open_term(void)
     // {
     //     std::cerr << e.what() << std::endl;
     // }
-        
+    bool    exit = false;
     std::vector<std::string> parse_line;
     StackOperand my_stack;
     std::string line = "";
     int i = 0;
     while (getline(std::cin, line, '\n'))
     {
-        try {
-            parse_line = ParseLine(line);
-            my_stack.checkOp(parse_line, true);
-        }
-        catch (const AVMExceptions &e)
-        {
-            e.what();
-            continue;
-        }
+        if (line == ";;" && exit == false)
+            throw NoExitException();
+        else if (line == ";;" && exit == true)
+            return;
+        parse_line = ParseLine(line);
+        exit = my_stack.checkOp(parse_line, true);
         i++;
     }
 }

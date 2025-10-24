@@ -14,5 +14,7 @@ void    AVMExceptions::handle() const //ajouter ici d'autres params pour mettre 
     std::cerr << what() << std::endl;
     #ifndef BONUS
         exit(1);
+    #else
+        throw;
     #endif
 }

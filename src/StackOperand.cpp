@@ -21,72 +21,72 @@ void     StackOperand::comment(std::vector<std::string> args)
     // this->_stack.push(a);
 }
 
-void    StackOperand::execInstr(std::vector<std::string> args, bool in_term, Instruction instr)
+bool    StackOperand::execInstr(std::string args, Instruction instr)
 {
-    (void) args;
-    (void) in_term;
+    // (void) args;
+    std::cout << "in exec instr args = " << args << std::endl;
+    std::cout << "in exec instr instr = " << instr << std::endl;
     switch (instr)
     {
         case Push:
-            break;
+            // break;
         case Pop:
-            break;
+            // break;
         case Dump:
-            break;
+            // break;
         case Assert:
-            break;
+            // break;
         case Add:
-            break;
+            // break;
         case Sub:
-            break;
+            // break;
         case Mul:
-            break;
+            // break;
         case Div:
-            break;
+            // break;
         case Mod:
-            break;
+            // break;
         case Print:
-            break;
+            // break;
         case Comment:
-            break;
+            // break;
         case Exit:
-        {
-            std::cout << "ici ?" << std::endl;
-            std::exit(0);
-        }
+            // break;
         default:
         {
-            //throw
         }
     }
+    return (true);
 }
 
 
-void     StackOperand::checkOp(std::vector<std::string> args, bool in_term)
+bool     StackOperand::checkOp(std::vector<std::string> args, bool in_term)
 {
     if (args.empty())
-        return ;
+        return false;
 
     Instruction tmp = UNKNOWN;
-    if (!args[0].empty())
+    std::string val = "";
+    bool exec = false;
+    for (std::vector<std::string>::iterator it = args.begin(); it != args.end();)
     {
-        tmp = parseInstruction(args[0]);
-        tmp = checkOther(in_term, args[0], tmp);
-        std::cout << args[0] << "|" << tmp << std::endl;
-        if (tmp == Exit)
-            return;
-        // execInstr(args, in_term, tmp);
+        tmp = parseInstruction(*it);
+        it = (args.erase(it));
+        if (tmp == Push || tmp == Assert)
+        {
+            exec = execInstr(*it, tmp);
+            if (exec == true && !args.empty())
+                it = (args.erase(it));
+        }
+        else
+            tmp = checkOther(in_term, *it, tmp);
+        
+        std::cout << "Je lis ici : " << *it << " | " << tmp << std::endl;
+        if (tmp == Exit && in_term == false)
+            return (true);
+
     }
-    // std::cout << "check = " << tmp << std::endl;
-    // if (tmp == Comment || tmp == Exit)
-    // {
-    //     execInstr(args, in_term, tmp);
-    //     break;
-    // }
-    // if (args.empty())
-        // break;
-    // std::cout << "args = " << *it << "| instr = " << tmp << std::endl;
-    // std::cout << *it << std::endl;
-    // tmp = checkOther(in_term, args, tmp);
+        // execInstr(args, in_term, tmp);
+    return (false);
 }
 

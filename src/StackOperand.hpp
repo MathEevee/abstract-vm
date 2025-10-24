@@ -30,8 +30,8 @@ class StackOperand {
     public :
         StackOperand();
         ~StackOperand();
-        void        checkOp(std::vector<std::string> args, bool in_term);
-        void        execInstr(std::vector<std::string> args, bool in_term, Instruction instr);
+        bool        checkOp(std::vector<std::string> args, bool in_term);
+        bool        execInstr(std::string args, Instruction instr);
 
 
 };
