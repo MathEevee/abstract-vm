@@ -26,11 +26,24 @@ Instruction parseInstruction(const std::string &cmd)
 }
 
 
-bool checkFormats(std::string args, Instruction instr)
+std::string checkFormats(std::string args)
 {
-    (void) args;
-    (void) instr;
-    return (true);
+    std::cout << "\n\n\n\n\n\n----------------------\n" << args << std::endl;   // int8
+    std::smatch matches;
+    // std::string str = args.substr(args.find('(') + 1, args.find(')') - 1);
+    std::regex pattern(VALUE_PATTERN);
+    // std::cout << "str = " << str << std::endl;   // int8
+    if (std::regex_match(args, matches, pattern))
+    {
+        return (matches[2]);
+        // std::cout << "Va2leur : " << matches[2] << std::endl; // 42
+    }
+    else
+        throw LexicalErrorException();
+    // std::cout << "----------------------\n" << std::endl;   // int8
+    // if (args )
+    // return (true);
+    // return ("");
 }
 
 

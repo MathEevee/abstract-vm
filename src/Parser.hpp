@@ -20,7 +20,10 @@
 
 // #define OTHER_PATTERN R"(^\w+ (float|double)\((-?\d+(?:\.\d+)?(?:[eE][-+]?\d+)?|\.\d+(?:[eE][-+]?\d+)?)\)$)"
 
-// #define VALUE_PATTERN R"(^\w+ ((?:int(8|16|32))\((-?\d+)\)|(float|double)\((-?\d+(?:\.\d+)?(?:[eE][-+]?\d+)?|\.\d+(?:[eE][-+]?\d+)?)\))$)"
+// #define VALUE_PATTERN R"(^\w+ ((?:int(8|16|32))\((-?\d+)\)|(float|double)\((-?\d+(?:\.\d+)?(?:[eE][-+]?\d+)?)\))$)"
+
+#define VALUE_PATTERN R"((?:^(?:(?:int(8|16|32))\((-?\d+)\)|(float|double)\((-?\d+(?:\.\d+)?(?:[eE][-+]?\d+)?)\))$))"
+
 
 enum Instruction {
     Comment,
@@ -43,6 +46,7 @@ std::vector<std::string>	ParseLine(std::string line);
 eOperandType				parseType(const std::string &cmd);
 Instruction					parseInstruction(const std::string &cmd);
 Instruction					checkOther(bool in_term, std::string args, Instruction instr);
+std::string					checkFormats(std::string args);
 
 
 #endif

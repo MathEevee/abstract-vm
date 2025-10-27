@@ -74,6 +74,19 @@ bool     StackOperand::checkOp(std::vector<std::string> args, bool in_term)
         it = (args.erase(it));
         if (tmp == Push || tmp == Assert)
         {
+            try {
+
+                val = checkFormats(*it);
+            // if (val.empty())
+            // {
+                // it = (args.erase(it));
+                // continue;
+            // }
+            }
+            catch (const AVMExceptions &e){
+                std::cerr << e.what() << std::endl;
+                continue;
+            }
             exec = execInstr(*it, tmp);
             if (exec == true && !args.empty())
                 it = (args.erase(it));

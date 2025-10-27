@@ -49,7 +49,12 @@ void    open_file(std::ifstream &input)
     while (getline(input, line, '\n'))
     {
         parse_line = ParseLine(line);
-        exit = my_stack.checkOp(parse_line, false);
+        // try{
+            exit = my_stack.checkOp(parse_line, false);
+        // }
+        // catch (const AVMExceptions &e){
+        //     std::cerr << e.what() << std::endl;
+        // }
         if (exit == true)
             break;
         i++;
