@@ -13,7 +13,7 @@ void    AVMExceptions::handle() const //ajouter ici d'autres params pour mettre 
 {
     std::cerr << what() << std::endl;
     #ifndef BONUS
-        exit(1);
+        exit(1); // change & return bool value or enum
     #else
         throw;
     #endif

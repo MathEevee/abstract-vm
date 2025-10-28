@@ -26,20 +26,20 @@ void test_f()
     }
     catch (const AVMExceptions &e)
     {
-        e.what();
+        e.handle();
     }
     try {
         test(a);
     }
     catch (const AVMExceptions &e)
     {
-        e.what();
+        e.handle();
     }
 }
 
 void    open_file(std::ifstream &input)
 {
-
+    test_f();
     bool    exit = false;
 
     std::vector<std::string> parse_line;
@@ -85,6 +85,7 @@ void    open_term(void)
     // {
     //     std::cerr << e.what() << std::endl;
     // }
+    test_f();
     bool    exit = false;
     std::vector<std::string> parse_line;
     StackOperand my_stack;

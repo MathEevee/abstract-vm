@@ -59,6 +59,9 @@
         "cinttypes": "cpp",
         "typeinfo": "cpp",
         "regex": "cpp",
-        "bitset": "cpp"
+        "bitset": "cpp",
+        "queue": "cpp",
+        "ranges": "cpp",
+        "stack": "cpp"
     }
 }

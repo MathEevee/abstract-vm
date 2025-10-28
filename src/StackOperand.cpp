@@ -85,7 +85,6 @@ bool     StackOperand::checkOp(std::vector<std::string> args, bool in_term)
             }
             catch (const AVMExceptions &e){
                 std::cerr << e.what() << std::endl;
-                continue;
             }
             exec = execInstr(*it, tmp);
             if (exec == true && !args.empty())
