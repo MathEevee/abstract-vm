@@ -4,12 +4,18 @@
 #include <exception>
 #include <iostream>
 
+enum error {
+    Manda_succes,
+    Manda_failed,
+    Bonus
+};
+
 class AVMExceptions : public std::exception {
     public :
         AVMExceptions(const char *msg);
         const char* what() const noexcept override;
 
-        void    handle() const;
+        error    handle() const;
         virtual ~AVMExceptions();
     private :
         const char* _msg;

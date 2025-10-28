@@ -13,31 +13,104 @@ StackOperand::~StackOperand()
     }
 }
 
-void     StackOperand::comment(std::vector<std::string> args)
+void     StackOperand::print_all(void)
 {
-    // OperandFactory factory;
-    (void) args;
-    // const IOperand* a = factory.createOperand(Float, std::to_string(841564512135143.15614685120));
-    // this->_stack.push(a);
+    std::stack<const IOperand *> tmp = this->_stack;
+    const IOperand *print_tmp;
+    while (!tmp.empty())
+    {
+        std::cout << tmp.size() << std::endl;
+        print_tmp = tmp.top();
+        std::cout << "my_value = " << print_tmp->toString() << std::endl;
+        tmp.pop();
+    }
+}
+
+void     StackOperand::comment(void)
+{
+    return;
+}
+
+void     StackOperand::push(std::string args)
+{
+    std::smatch matches;
+    std::regex pattern(VALUE_PATTERN);
+    std::regex_match(args, matches, pattern);
+    const OperandFactory new_operand;
+    const IOperand *new_elem;
+    eOperandType type = parseType(matches[1]);
+    if (matches[1] == "")
+    {
+        type = parseType(matches[3]);
+        new_elem = new_operand.createOperand(type, matches[4]);
+    }
+    else
+        new_elem = new_operand.createOperand(type, matches[2]);
+    this->_stack.push(new_elem);
+}
+
+void     StackOperand::dump()
+{
+    std::stack<const IOperand *> tmp = this->_stack;
+
+    while (!tmp.empty())
+    {
+        std::cout << tmp.top()->toString() << std::endl;
+        tmp.pop();
+    }
+}
+
+void     StackOperand::pop()
+{
+    if (this->_stack.empty())
+        throw PopEmptyStackException();
+    const IOperand *tmp = this->_stack.top();
+    this->_stack.pop();
+    delete (tmp);
+}
+
+bool     StackOperand::add()
+{
+    if (this->_stack.size() < 2)
+        throw ArithmeticException();
+    const IOperand *a = this->_stack.top();
+    this->_stack.pop();
+    const IOperand *b = this->_stack.top();
+    this->_stack.pop();
+    try {
+        const IOperand *result = b->operator+(*a);
+        delete (a);
+        delete (b);
+        this->_stack.push(result);
+        return (true);
+    }
+    catch (const AVMExceptions &e)
+    {
+        this->_stack.push(b);
+        this->_stack.push(a);
+        if (e.handle() == Bonus)
+            return (true);
+        return (false);
+    }
 }
 
 bool    StackOperand::execInstr(std::string args, Instruction instr)
 {
-    // (void) args;
-    std::cout << "in exec instr args = " << args << std::endl;
-    std::cout << "in exec instr instr = " << instr << std::endl;
     switch (instr)
     {
         case Push:
-            // break;
+            push(args);
+            break;
         case Pop:
-            // break;
+            pop();
+            break;
         case Dump:
-            // break;
+            dump();
+            break;
         case Assert:
             // break;
         case Add:
-            // break;
+            return (add());
         case Sub:
             // break;
         case Mul:
@@ -49,7 +122,8 @@ bool    StackOperand::execInstr(std::string args, Instruction instr)
         case Print:
             // break;
         case Comment:
-            // break;
+            comment();
+            break;
         case Exit:
             // break;
         default:
@@ -60,13 +134,12 @@ bool    StackOperand::execInstr(std::string args, Instruction instr)
 }
 
 
-bool     StackOperand::checkOp(std::vector<std::string> args, bool in_term)
+bool     StackOperand::checkOp(std::vector<std::string> args, bool in_term, error &bonus)
 {
     if (args.empty())
         return false;
 
     Instruction tmp = UNKNOWN;
-    std::string val = "";
     bool exec = false;
     for (std::vector<std::string>::iterator it = args.begin(); it != args.end();)
     {
@@ -75,30 +148,65 @@ bool     StackOperand::checkOp(std::vector<std::string> args, bool in_term)
         if (tmp == Push || tmp == Assert)
         {
             try {
+                checkFormats(*it);
+            }
+            catch (const AVMExceptions &e)
+            {
+                bonus = e.handle();
+                if (bonus != Bonus)
+                {
+                    bonus = Manda_failed;
+                    return (Manda_failed);
+                }
+            }
+            try {
 
-                val = checkFormats(*it);
-            // if (val.empty())
-            // {
-                // it = (args.erase(it));
-                // continue;
-            // }
+                exec = execInstr(*it, tmp);
+                if (exec == true && !args.empty())
+                    it = (args.erase(it));
+                if (exec == false)
+                {
+                    bonus = Manda_failed;
+                    return (bonus);
+                }
             }
-            catch (const AVMExceptions &e){
-                std::cerr << e.what() << std::endl;
+            catch (const AVMExceptions &e)
+            {
+                // bonus = e.handle();
+                // if (bonus != Bonus)
+                // {
+                //     bonus = Manda_failed;
+                //     return (Manda_failed);
+                // }
             }
-            exec = execInstr(*it, tmp);
-            if (exec == true && !args.empty())
-                it = (args.erase(it));
         }
         else
-            tmp = checkOther(in_term, *it, tmp);
-        
-        std::cout << "Je lis ici : " << *it << " | " << tmp << std::endl;
+        {
+            try {
+                tmp = checkOther(in_term, *it, tmp);
+                exec = execInstr(*it, tmp);
+                if (exec == false)
+                {
+                    bonus = Manda_failed;
+                    return (Manda_failed);
+                }
+            }
+            catch (const AVMExceptions &e)
+            {
+                // bonus = e.handle();
+                // if (exec == false && bonus != Bonus)
+                // {
+                //     bonus = Manda_failed;
+                //     return (bonus);
+                // }
+                // return (Manda_failed);
+            }
+        }
         if (tmp == Exit && in_term == false)
             return (true);
-
     }
-        // execInstr(args, in_term, tmp);
+    if (tmp == Exit)
+        return (true);
     return (false);
 }
 

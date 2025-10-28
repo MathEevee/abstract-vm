@@ -26,20 +26,19 @@ void test_f()
     }
     catch (const AVMExceptions &e)
     {
-        e.handle();
+        e.what();
     }
     try {
         test(a);
     }
     catch (const AVMExceptions &e)
     {
-        e.handle();
+        e.what();
     }
 }
 
-void    open_file(std::ifstream &input)
+void    open_file(std::ifstream &input, error &bonus)
 {
-    test_f();
     bool    exit = false;
 
     std::vector<std::string> parse_line;
@@ -50,7 +49,12 @@ void    open_file(std::ifstream &input)
     {
         parse_line = ParseLine(line);
         // try{
-            exit = my_stack.checkOp(parse_line, false);
+        exit = my_stack.checkOp(parse_line, false, bonus);
+        if (bonus == Manda_failed)
+        {
+            std::cout << "check ? = " << bonus << std::endl;
+            break;
+        }
         // }
         // catch (const AVMExceptions &e){
         //     std::cerr << e.what() << std::endl;
@@ -59,11 +63,12 @@ void    open_file(std::ifstream &input)
             break;
         i++;
     }
-    if (exit == false)
+    if (exit == false && bonus != Manda_failed)
         throw NoExitException();
+    my_stack.print_all(); //suppr
 }
 
-void    open_term(void)
+void    open_term(error &bonus)
 {
     // try {
 
@@ -85,7 +90,6 @@ void    open_term(void)
     // {
     //     std::cerr << e.what() << std::endl;
     // }
-    test_f();
     bool    exit = false;
     std::vector<std::string> parse_line;
     StackOperand my_stack;
@@ -93,12 +97,18 @@ void    open_term(void)
     int i = 0;
     while (getline(std::cin, line, '\n'))
     {
+
         if (line == ";;" && exit == false)
             throw NoExitException();
         else if (line == ";;" && exit == true)
             return;
         parse_line = ParseLine(line);
-        exit = my_stack.checkOp(parse_line, true);
+        exit = my_stack.checkOp(parse_line, true, bonus);
+        if (bonus == Manda_failed)
+        {
+            std::cout << "je veux check :" << std::endl;
+            break;
+        }
         i++;
     }
 }
@@ -107,23 +117,23 @@ int main(int ac, char **av)
 {
     try
     {
+        error    bonus = Manda_succes;
         if (ac == 2)
         {
             std::ifstream input;
-
             input.open(av[1]);
             if (!input.is_open())
                 throw CantOpenFile();
-            open_file(input);
+            open_file(input, bonus);
         }
         else if (ac == 1)
-            open_term();
+            open_term(bonus);
         else
             throw TooManyParams();
     }
     catch (const AVMExceptions &e)
     {
-        std::cout << e.what() << std::endl;
+        std::cout << e.handle() << std::endl;
     }
     return 1;
 }
