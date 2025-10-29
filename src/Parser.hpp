@@ -44,7 +44,7 @@ enum Instruction {
 std::vector<std::string>	ParseLine(std::string line);
 eOperandType				parseType(const std::string &cmd);
 Instruction					parseInstruction(const std::string &cmd);
-Instruction					checkOther(bool in_term, std::string args, Instruction instr);
+Instruction					checkOther(std::string args, Instruction instr);
 void						checkFormats(std::string args);
 
 

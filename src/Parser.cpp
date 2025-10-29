@@ -35,13 +35,13 @@ void checkFormats(std::string args)
 }
 
 
-Instruction checkOther(bool in_term, std::string args, Instruction instr)
+Instruction checkOther(std::string args, Instruction instr)
 {
     if (instr == Comment)
         return (instr);
     if (instr == Exit && args[0] == ';')
         return (instr);
-    if (args[0] == ';' && in_term == false)
+    if (args[0] == ';')
         return (Comment);
     return (instr);
 }
@@ -79,13 +79,8 @@ std::vector<std::string>    ParseLine(std::string line)
         {
             if (str != "")
                 args.push_back(str);
-            if (*(it + 1) == ';' && (*it) == ';')
-            {
-                args.push_back(";;");
-                it += 2;
-            }
-            else
-                is_com = true;
+            if ((*it) == ';')
+            is_com = true;
             str = "";
         }
         if (is_com == false && *it == ' ')
@@ -102,5 +97,10 @@ std::vector<std::string>    ParseLine(std::string line)
     }
     if (str != "")
         args.push_back(str);
+    // for (std::vector<std::string>::iterator it = args.begin(); it != args.end(); it++)
+    // {
+    //     std::cout << "args = " << *it << std::endl;
+    // }
+    
     return (args);
 }

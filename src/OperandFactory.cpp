@@ -26,15 +26,15 @@ IOperand const *OperandFactory::createOperand(eOperandType type, std::string con
             checkRange(type, value);
             return (new Operand<float, Float>(value));
         }
-        default :
+       case Double:
         {
             checkRange(type, value);
             return (new Operand<double, Double>(value));
         }
-        // default:
-        // {
-        //     throw LexicalErrorException();
-        // }
+        default:
+        {
+            throw LexicalErrorException();
+        }
     }
 }
 

@@ -14,13 +14,13 @@ class StackOperand {
     
         std::stack<const IOperand *>    _stack;
 
-        void comment(void);
-        void push(std::string args);
-        void pop(void);
+        bool comment(void);
+        bool push(std::string args);
+        bool pop(void);
         void dump(void);
         void assert(std::stack<const IOperand *> &stack, std::vector<std::string> args);
         bool add();
-        void sub(std::stack<const IOperand *> &stack, std::vector<std::string> args);
+        bool sub();
         void mul(std::stack<const IOperand *> &stack, std::vector<std::string> args);
         void div(std::stack<const IOperand *> &stack, std::vector<std::string> args);
         void mod(std::stack<const IOperand *> &stack, std::vector<std::string> args);
@@ -33,7 +33,7 @@ class StackOperand {
 
         StackOperand();
         ~StackOperand();
-        bool        checkOp(std::vector<std::string> args, bool in_term, error &bonus);
+        bool        checkOp(std::vector<std::string> args, error &bonus);
         bool        execInstr(std::string args, Instruction instr);
 
 

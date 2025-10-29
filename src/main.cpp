@@ -48,48 +48,18 @@ void    open_file(std::ifstream &input, error &bonus)
     while (getline(input, line, '\n'))
     {
         parse_line = ParseLine(line);
-        // try{
-        exit = my_stack.checkOp(parse_line, false, bonus);
-        if (bonus == Manda_failed)
-        {
-            std::cout << "check ? = " << bonus << std::endl;
-            break;
-        }
-        // }
-        // catch (const AVMExceptions &e){
-        //     std::cerr << e.what() << std::endl;
-        // }
-        if (exit == true)
+        exit = my_stack.checkOp(parse_line, bonus);
+        if (bonus == Manda_failed || exit == true)
             break;
         i++;
     }
     if (exit == false && bonus != Manda_failed)
         throw NoExitException();
-    my_stack.print_all(); //suppr
+    // my_stack.print_all(); //suppr
 }
 
 void    open_term(error &bonus)
 {
-    // try {
-
-    //     OperandFactory factory;
-        
-    //     const IOperand* a = factory.createOperand(Int8, std::to_string(10));
-    //     const IOperand* b = factory.createOperand(Int8, std::to_string(50));
-        
-    //     const IOperand *result_mult = a->operator*(*b);
-        
-    //     std::cout << a->toString() << " * " << b->toString() << " = " << result_mult->toString() << std::endl;
-
-            
-    //     delete a;
-    //     delete b;
-    //     delete result_mult;
-    // }
-    // catch (const AVMExceptions &e)
-    // {
-    //     std::cerr << e.what() << std::endl;
-    // }
     bool    exit = false;
     std::vector<std::string> parse_line;
     StackOperand my_stack;
@@ -97,20 +67,17 @@ void    open_term(error &bonus)
     int i = 0;
     while (getline(std::cin, line, '\n'))
     {
-
-        if (line == ";;" && exit == false)
-            throw NoExitException();
-        else if (line == ";;" && exit == true)
-            return;
-        parse_line = ParseLine(line);
-        exit = my_stack.checkOp(parse_line, true, bonus);
-        if (bonus == Manda_failed)
-        {
-            std::cout << "je veux check :" << std::endl;
+        if (line == ";;")
             break;
+        if (exit == false)        
+        {
+            parse_line = ParseLine(line);
+            exit = my_stack.checkOp(parse_line, bonus);
+            i++;
         }
-        i++;
     }
+    if (exit == false)
+        throw NoExitException();
 }
 
 int main(int ac, char **av)
@@ -133,7 +100,7 @@ int main(int ac, char **av)
     }
     catch (const AVMExceptions &e)
     {
-        std::cout << e.handle() << std::endl;
+        std::cerr << e.handle() << std::endl;
     }
     return 1;
 }
