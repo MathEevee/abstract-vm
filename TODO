@@ -1,5 +1,3 @@
-- Retirer les 0 en trop
-- voir si double et float ne prennent que \d+.\d+ ou aussi \d+
 - faire un tester
 - voir pour print l'erreur dans l'instruction 
 {

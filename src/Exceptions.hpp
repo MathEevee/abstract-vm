@@ -18,6 +18,7 @@ class AVMExceptions : public std::exception {
         const char* what() const noexcept override;
 
         error    handle() const;
+        error    handle(std::string more_information) const;
         virtual ~AVMExceptions();
     private :
         const char* _msg;

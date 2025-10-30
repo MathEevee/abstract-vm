@@ -37,7 +37,6 @@ bool StackOperand::createElem(std::string args, const IOperand *&new_elem) const
     std::regex pattern(VALUE_PATTERN);
     const OperandFactory new_operand;
     try {
-
         if (!std::regex_match(args, matches, pattern))
             throw LexicalErrorException();
         eOperandType type = parseType(matches[1]);
@@ -52,7 +51,7 @@ bool StackOperand::createElem(std::string args, const IOperand *&new_elem) const
     }
     catch (const AVMExceptions &e)
     {
-        if (e.handle() != Bonus)
+        if (e.handle(args) != Bonus)
             return (false);
         return (true);
     }
@@ -101,8 +100,6 @@ bool     StackOperand::dump()
 
     while (!tmp.empty())
     {
-        // size = (tmp.top()->toString()).find_last_not_of('0') + 1;
-        // std::cout << (tmp.top()->toString()).substr(0, size) << std::endl;
         std::cout << (tmp.top()->toString()) << std::endl;
         tmp.pop();
     }
@@ -202,14 +199,14 @@ bool    StackOperand::search_operator(Instruction instr)
     return (calc_operator(functptr[i]));
 }
 
-bool    StackOperand::unknow()
+bool    StackOperand::unknow(std::string unknow_cmd)
 {
     try {
         throw NotAnInstructionException();
     }
     catch (const AVMExceptions &e)
     {
-        if (e.handle() == Bonus)
+        if (e.handle(unknow_cmd) == Bonus)
             return (true);
         return (false);
     }
@@ -234,7 +231,7 @@ bool    StackOperand::execInstr(std::string args, Instruction instr)
 		case Exit:
         	return (exit());
         case UNKNOWN:
-            return (unknow());
+            return (unknow(args));
         default:
             return (search_operator(instr));
     }

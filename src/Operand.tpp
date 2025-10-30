@@ -9,7 +9,7 @@ Operand<Unit, Type>::Operand(std::string const &value)
     if (Type == Int8 || Type == Int16 || Type == Int32)
         _str = std::to_string(static_cast<int>(_value));
     else
-        _str = value;
+        _str = value.substr(0, value.find_last_not_of('0') + 1);
 }
 
 template<typename Unit, eOperandType Type>
@@ -48,7 +48,6 @@ IOperand const * Operand<Unit, Type>::operator+( IOperand const & rhs ) const
 
     result = std::stod(this->toString()) + std::stod(rhs.toString());
 
-    checkRange(Double, std::to_string(result));
     OperandFactory factory;
     return (factory.createOperand(type, std::to_string(result)));
 }
@@ -60,6 +59,7 @@ IOperand const * Operand<Unit, Type>::operator-( IOperand const & rhs ) const
     eOperandType type = chooseType(*this, rhs);
 
     result = std::stod(this->toString()) - std::stod(rhs.toString());
+
     OperandFactory factory;
     return (factory.createOperand(type, std::to_string(result)));
 }
@@ -72,6 +72,7 @@ IOperand const * Operand<Unit, Type>::operator*( IOperand const & rhs ) const
     eOperandType type = chooseType(*this, rhs);
 
     result = std::stod(this->toString()) * std::stod(rhs.toString());
+
     OperandFactory factory;
     return (factory.createOperand(type, std::to_string(result)));
 }
@@ -86,6 +87,7 @@ IOperand const * Operand<Unit, Type>::operator/( IOperand const & rhs ) const
         throw ModDivNullException();
 
     result = std::stod(this->toString()) / std::stod(rhs.toString());
+
     OperandFactory factory;
     return (factory.createOperand(type, std::to_string(result)));
 }
@@ -98,10 +100,12 @@ IOperand const * Operand<Unit, Type>::operator%( IOperand const & rhs ) const
 
     if (std::stod(rhs.toString()) == 0)
         throw ModDivNullException();
+
     if (type == Int8 || type == Int16 || type == Int32)
         result = static_cast<long long>(std::stod(this->toString())) % static_cast<long long>(std::stod(rhs.toString()));
     else
         result = std::fmod(std::stod(this->toString()), std::stod(rhs.toString()));
+
     OperandFactory factory;
     return (factory.createOperand(type, std::to_string(result)));
 }
