@@ -22,7 +22,7 @@ Instruction parseInstruction(const std::string &cmd)
         if (cmd == name)
             return (instr);
     }
-    return (UNKNOWN);
+    return (checkOther(cmd, UNKNOWN));
 }
 
 
@@ -37,9 +37,7 @@ void checkFormats(std::string args)
 
 Instruction checkOther(std::string args, Instruction instr)
 {
-    if (instr == Comment)
-        return (instr);
-    if (instr == Exit && args[0] == ';')
+    if (instr == Exit)
         return (instr);
     if (args[0] == ';')
         return (Comment);
@@ -97,10 +95,10 @@ std::vector<std::string>    ParseLine(std::string line)
     }
     if (str != "")
         args.push_back(str);
-    // for (std::vector<std::string>::iterator it = args.begin(); it != args.end(); it++)
-    // {
-    //     std::cout << "args = " << *it << std::endl;
-    // }
+    /*for (std::vector<std::string>::iterator it = args.begin(); it != args.end(); it++)
+    {
+        std::cout << "args = " << *it << std::endl;
+    }*/
     
     return (args);
 }

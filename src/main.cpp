@@ -55,7 +55,7 @@ void    open_file(std::ifstream &input, error &bonus)
     }
     if (exit == false && bonus != Manda_failed)
         throw NoExitException();
-    // my_stack.print_all(); //suppr
+    my_stack.print_all(); //suppr
 }
 
 void    open_term(error &bonus)

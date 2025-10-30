@@ -109,6 +109,15 @@ IOperand const * Operand<Unit, Type>::operator%( IOperand const & rhs ) const //
     return (factory.createOperand(type, std::to_string(result)));
 }
 
+template<typename Unit, eOperandType Type>
+bool Operand<Unit, Type>::operator==(IOperand const & rhs) const
+{
+    std::cout << "ca passe la ?" << std::endl;
+    if (this->getType() == rhs.getType() && this->getPrecision() == rhs.getPrecision())
+        return (true);
+    return (false);
+}
+
 template class Operand<int8_t, Int8>;
 template class Operand<int16_t, Int16>;
 template class Operand<int, Int32>;

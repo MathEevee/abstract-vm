@@ -15,17 +15,17 @@ class StackOperand {
         std::stack<const IOperand *>    _stack;
 
         bool comment(void);
+        bool exit(void);
         bool push(std::string args);
         bool pop(void);
-        void dump(void);
-        void assert(std::stack<const IOperand *> &stack, std::vector<std::string> args);
+        bool dump(void);
+        bool assert(std::string arg);
         bool add();
         bool sub();
-        void mul(std::stack<const IOperand *> &stack, std::vector<std::string> args);
-        void div(std::stack<const IOperand *> &stack, std::vector<std::string> args);
-        void mod(std::stack<const IOperand *> &stack, std::vector<std::string> args);
+        bool mul();
+        bool div();
+        bool mod();
         void print(std::stack<const IOperand *> &stack, std::vector<std::string> args);
-        void exit(std::stack<const IOperand *> &stack, std::vector<std::string> args);
 
     public :
         void print_all();

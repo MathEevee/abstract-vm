@@ -29,6 +29,9 @@ class Operand : public IOperand
         IOperand const * operator%( IOperand const & rhs ) const; // Modulo
 
         std::string const & toString( void ) const; // String representation of the instance
+
+        bool operator==(IOperand const & rhs) const;
+
 };
     
 #include "Operand.tpp"

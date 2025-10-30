@@ -30,14 +30,14 @@ enum Instruction {
     Pop,
     Dump,
     Assert,
+    Print,
+    Exit,
+	UNKNOWN,
     Add,
     Sub,
     Mul,
     Div,
-    Mod,
-    Print,
-    Exit,
-	UNKNOWN
+    Mod
 };
 
 
