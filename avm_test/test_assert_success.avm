@@ -1,0 +1,7 @@
+; test_assert_ok.avm
+push int16(123)
+assert int16(123)
+exit
+
+; Expected output:
+; (no output, program exits cleanly)

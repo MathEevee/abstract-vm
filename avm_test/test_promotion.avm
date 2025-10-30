@@ -1,0 +1,9 @@
+; test_promotion.avm
+push int32(10)
+push float(2.5)
+mul
+dump
+exit
+
+; Expected output:
+; 25.0

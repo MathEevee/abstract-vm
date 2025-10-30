@@ -1,0 +1,11 @@
+; -------------
+; sample.avm -
+; -------------
+
+push float(44.55)
+push double(120.55)
+mul
+push double(25)
+mul
+dump
+exit

@@ -1,0 +1,8 @@
+; -------------
+; mod_test.avm -
+; -------------
+push double(1.0)
+push int8(33)
+mod
+dump
+exit

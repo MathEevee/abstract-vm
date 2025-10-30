@@ -1,0 +1,6 @@
+; test_pop_empty.avm
+pop
+exit
+
+; Expected output:
+; Error: Pop on empty stack

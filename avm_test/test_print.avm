@@ -1,0 +1,7 @@
+; test_print.avm
+push int8(42) ; ASCII code for '*'
+print
+exit
+
+; Expected output:
+; *

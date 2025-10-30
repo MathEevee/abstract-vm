@@ -1,0 +1,8 @@
+; test_no_exit.avm
+push int32(5)
+push int32(7)
+add
+; no exit!
+
+; Expected output:
+; Error: No exit instruction found

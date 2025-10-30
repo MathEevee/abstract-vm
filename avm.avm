@@ -1,3 +1,0 @@
-; ==== PUSH et ASSERT basiques ====
-push int8(42)
-assert int8(42)

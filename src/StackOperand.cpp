@@ -98,10 +98,12 @@ bool StackOperand::assert(std::string args)
 bool     StackOperand::dump()
 {
     std::stack<const IOperand *> tmp = this->_stack;
+    int size = 0;
 
     while (!tmp.empty())
     {
-        std::cout << tmp.top()->toString() << std::endl;
+        size = (tmp.top()->toString()).find_last_not_of('0') + 1;
+        std::cout << (tmp.top()->toString()).substr(0, size) << std::endl;
         tmp.pop();
     }
     return (true);

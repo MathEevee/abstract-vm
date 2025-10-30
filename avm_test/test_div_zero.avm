@@ -1,0 +1,8 @@
+; test_div_zero.avm
+push int16(10)
+push int16(0)
+div
+exit
+
+; Expected output:
+; Error: Division by zero

@@ -1,0 +1,7 @@
+; test_assert_fail.avm
+push int8(42)
+assert int8(43)
+exit
+
+; Expected output:
+; Error: Assert failed (or your error message)

@@ -1,0 +1,6 @@
+; test_overflow_int8.avm
+push int8(200)
+exit
+
+; Expected output:
+; Error: Overflow/Underflow for int8: 200
