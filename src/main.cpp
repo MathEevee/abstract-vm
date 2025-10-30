@@ -21,11 +21,11 @@ void    open_file(std::ifstream &input, error &bonus)
     std::string line = "";
     while (getline(input, line, '\n'))
     {
+        increment();
         parse_line = ParseLine(line);
         exit = my_stack.checkOp(parse_line, bonus);
         if (bonus == Manda_failed || exit == true)
             break;
-        increment();
     }
     if (exit == false && bonus != Manda_failed)
         throw NoExitException();
@@ -44,9 +44,9 @@ void    open_term(error &bonus)
             break;
         if (exit == false)        
         {
+            increment();
             parse_line = ParseLine(line);
             exit = my_stack.checkOp(parse_line, bonus);
-            increment();
         }
     }
     if (exit == false)

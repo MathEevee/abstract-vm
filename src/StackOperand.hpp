@@ -21,6 +21,7 @@ class StackOperand {
         bool    dump(void);
         bool    assert(std::string arg);
         bool    print();
+        bool    unknow();
         bool    search_operator(Instruction instr);
         bool    calc_operator(const IOperand* (IOperand::*my_operator)(const IOperand&) const);
         bool    createElem(std::string args, const IOperand *&new_elem) const;

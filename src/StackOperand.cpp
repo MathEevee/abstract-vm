@@ -98,12 +98,12 @@ bool StackOperand::assert(std::string args)
 bool     StackOperand::dump()
 {
     std::stack<const IOperand *> tmp = this->_stack;
-    int size = 0;
 
     while (!tmp.empty())
     {
-        size = (tmp.top()->toString()).find_last_not_of('0') + 1;
-        std::cout << (tmp.top()->toString()).substr(0, size) << std::endl;
+        // size = (tmp.top()->toString()).find_last_not_of('0') + 1;
+        // std::cout << (tmp.top()->toString()).substr(0, size) << std::endl;
+        std::cout << (tmp.top()->toString()) << std::endl;
         tmp.pop();
     }
     return (true);
@@ -202,6 +202,18 @@ bool    StackOperand::search_operator(Instruction instr)
     return (calc_operator(functptr[i]));
 }
 
+bool    StackOperand::unknow()
+{
+    try {
+        throw NotAnInstructionException();
+    }
+    catch (const AVMExceptions &e)
+    {
+        if (e.handle() == Bonus)
+            return (true);
+        return (false);
+    }
+}
 
 bool    StackOperand::execInstr(std::string args, Instruction instr)
 {
@@ -222,10 +234,7 @@ bool    StackOperand::execInstr(std::string args, Instruction instr)
 		case Exit:
         	return (exit());
         case UNKNOWN:
-        {
-            throw NotAnInstructionException();
-            return (false);
-        }
+            return (unknow());
         default:
             return (search_operator(instr));
     }

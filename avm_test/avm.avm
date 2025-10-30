@@ -1,11 +1,6 @@
-; -------------
-; sample.avm -
-; -------------
-
-push float(44.55)
-push double(120.55)
+push double(10.4200)
+push double(1)
 mul
-push double(25)
-mul
+assert double(10.42)
 dump
 exit
