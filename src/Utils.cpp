@@ -1,6 +1,12 @@
 #include "Utils.hpp"
 #include "MyExceptions.hpp"
 
+int g_line_error = 0;
+
+void increment() {
+    g_line_error++;
+}
+
 void    strcmpRange(double min, double max, std::string const &value)
 {
     double tmp = std::stod(value);

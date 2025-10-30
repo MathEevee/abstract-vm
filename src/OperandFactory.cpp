@@ -38,16 +38,3 @@ IOperand const *OperandFactory::createOperand(eOperandType type, std::string con
     }
 }
 
-// IOperand const *OperandFactory::promoteOperand(IOperand const &a, IOperand const &b) const
-// {
-//     eOperandType type = a.getType();
-//     double result = std::stod(b.toString());
-
-//     if (type < b.getType())
-//     {
-//         type = b.getType();
-//         result = std::stod(a.toString());
-//     }
-    
-//     return (createOperand(type, std::to_string(result)));
-// }

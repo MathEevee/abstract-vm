@@ -1,36 +1,36 @@
 #include "MyExceptions.hpp"
 
-ModDivNullException::ModDivNullException() : AVMExceptions("Error: Division or modulo by zero")
+ModDivNullException::ModDivNullException() : AVMExceptions("Division or modulo by zero")
 {}
 
-PopEmptyStackException::PopEmptyStackException() : AVMExceptions("Error: Cannot pop from an empty stack")
+PopEmptyStackException::PopEmptyStackException() : AVMExceptions("Cannot pop from an empty stack")
 {}
 
-NoExitException::NoExitException() : AVMExceptions("Error: Missing exit instruction")
+NoExitException::NoExitException() : AVMExceptions("Missing exit instruction")
 {}
 
-OverflowException::OverflowException() : AVMExceptions("Error: Value overflow")
+OverflowException::OverflowException() : AVMExceptions("Value overflow")
 {}
 
-UnderflowException::UnderflowException() : AVMExceptions("Error: Value underflow")
+UnderflowException::UnderflowException() : AVMExceptions("Value underflow")
 {}
 
-AssertFalseException::AssertFalseException() : AVMExceptions("Error: Assert failed")
+AssertFalseException::AssertFalseException() : AVMExceptions("Assert failed")
 {}
 
-NotAnInstructionException::NotAnInstructionException() : AVMExceptions("Error: Unknown instruction")
+NotAnInstructionException::NotAnInstructionException() : AVMExceptions("Unknown instruction")
 {}
 
-LexicalErrorException::LexicalErrorException() : AVMExceptions("Error: Lexical error")
-{}
-
-
-ArithmeticException::ArithmeticException() : AVMExceptions("Error: Arithmetic error")
-{}
-
-CantOpenFile::CantOpenFile() : AVMExceptions("Error: Cannot open file")
+LexicalErrorException::LexicalErrorException() : AVMExceptions("Lexical error")
 {}
 
 
-TooManyParams::TooManyParams() : AVMExceptions("Error: ./avm <file> or ./avm")
+ArithmeticException::ArithmeticException() : AVMExceptions("Arithmetic error")
+{}
+
+CantOpenFile::CantOpenFile() : AVMExceptions("Cannot open file")
+{}
+
+
+TooManyParams::TooManyParams() : AVMExceptions("./avm <file> or ./avm")
 {}

@@ -3,6 +3,8 @@
 
 #include <exception>
 #include <iostream>
+#include "Utils.hpp"
+
 
 enum error {
     Manda_succes,

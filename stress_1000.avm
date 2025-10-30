@@ -1,0 +1,831 @@
+push double(480.06)
+push float(557.58)
+add
+assert double(480.06)
+push int8(15)
+push int32(18378)
+sub
+assert int8(15)
+print
+push int16(3740)
+push int8(89)
+add
+assert int16(3740)
+push int32(30102)
+push float(790.98)
+mul
+assert int32(30102)
+push int16(13366)
+push float(59.76)
+mod
+assert int16(13366)
+push int16(9668)
+push double(897.53)
+mod
+assert double(897.53)
+push float(425.94)
+push float(635.87)
+mod
+assert float(635.87)
+push int8(84)
+push float(92.27)
+add
+assert float(92.27)
+print
+push int16(13366)
+push double(369.02)
+mod
+assert double(369.02)
+push float(846.81)
+push int8(41)
+div
+assert int8(41)
+push int16(7173)
+push int16(13786)
+sub
+assert int16(13786)
+push float(155.08)
+push double(751.3)
+div
+assert float(155.08)
+push float(747.06)
+push double(393.34)
+div
+assert float(747.06)
+push float(989.22)
+push int32(4310)
+mul
+assert int32(4310)
+push int16(29722)
+push float(518.65)
+sub
+assert int16(29722)
+push int8(108)
+push int32(8732)
+add
+assert int32(8732)
+print
+push int32(18060)
+push int8(25)
+mul
+assert int8(25)
+push float(865.92)
+push int8(46)
+add
+assert float(865.92)
+push int16(16679)
+push int16(1339)
+mod
+assert int16(16679)
+push double(801.7)
+push int8(124)
+sub
+assert double(801.7)
+push double(986.2)
+push int32(12286)
+mod
+assert int32(12286)
+push float(337.86)
+push int8(37)
+add
+assert float(337.86)
+push int16(29337)
+push double(573.11)
+div
+assert double(573.11)
+push double(744.8)
+push double(238.01)
+mod
+assert double(744.8)
+push double(234.76)
+push double(602.74)
+mul
+assert double(602.74)
+push int8(14)
+push int32(16007)
+sub
+assert int32(16007)
+print
+push int32(12177)
+push int16(10902)
+mul
+assert int32(12177)
+push double(154.91)
+push float(802.97)
+mod
+assert double(154.91)
+push int8(30)
+push int32(21622)
+div
+assert int32(21622)
+print
+push double(979.92)
+push float(84.35)
+sub
+assert float(84.35)
+push int32(27395)
+push double(286.49)
+sub
+assert double(286.49)
+push int8(65)
+push int16(31874)
+div
+assert int16(31874)
+print
+push float(13.54)
+push int32(31801)
+mod
+assert int32(31801)
+push int32(27520)
+push int32(9191)
+mod
+assert int32(27520)
+push double(395.79)
+push double(957.65)
+add
+assert double(957.65)
+push int32(1214)
+push int8(99)
+div
+assert int8(99)
+push double(365.06)
+push int32(16164)
+div
+assert int32(16164)
+push double(426.29)
+push int8(15)
+sub
+assert double(426.29)
+push int16(14967)
+push float(2.09)
+mod
+assert float(2.09)
+push int8(48)
+push int16(8593)
+sub
+assert int8(48)
+print
+push float(522.55)
+push int32(2144)
+div
+assert float(522.55)
+push int8(13)
+push int16(17516)
+add
+assert int8(13)
+print
+push int32(1088)
+push double(34.21)
+mod
+assert int32(1088)
+push int16(23889)
+push int16(24689)
+div
+assert int16(24689)
+push float(501.34)
+push double(65.72)
+add
+assert double(65.72)
+push int8(69)
+push int8(10)
+mod
+assert int8(69)
+print
+push int16(30735)
+push int32(12138)
+mul
+assert int16(30735)
+push int32(31541)
+push int32(25065)
+mod
+assert int32(25065)
+push double(551.22)
+push double(892.13)
+add
+assert double(551.22)
+push double(996.67)
+push int32(22955)
+mul
+assert int32(22955)
+push double(966.36)
+push int16(7171)
+sub
+assert double(966.36)
+push double(936.97)
+push int32(9310)
+div
+assert double(936.97)
+push int16(22317)
+push int16(3659)
+add
+assert int16(3659)
+push int8(22)
+push int32(29635)
+mul
+assert int32(29635)
+print
+push int8(54)
+push float(107.39)
+mul
+assert float(107.39)
+print
+push int32(21887)
+push double(768.71)
+mul
+assert int32(21887)
+push float(612.21)
+push int16(9236)
+mul
+assert float(612.21)
+push double(837.48)
+push int8(83)
+sub
+assert double(837.48)
+push int16(27117)
+push float(286.25)
+sub
+assert int16(27117)
+push int16(23425)
+push int16(18065)
+mul
+assert int16(23425)
+push double(476.89)
+push int8(28)
+div
+assert int8(28)
+push double(473.71)
+push int16(15147)
+sub
+assert double(473.71)
+push int32(27455)
+push float(643.07)
+add
+assert float(643.07)
+push float(109.02)
+push int16(24340)
+div
+assert int16(24340)
+push int32(28155)
+push float(601.9)
+add
+assert float(601.9)
+push int32(31385)
+push double(219.19)
+div
+assert double(219.19)
+push int8(2)
+push int16(32605)
+mod
+assert int8(2)
+print
+push double(485.75)
+push int16(9830)
+sub
+assert double(485.75)
+push int8(77)
+push float(585.96)
+div
+assert float(585.96)
+print
+push int32(1780)
+push int32(21962)
+mod
+assert int32(1780)
+push float(379.04)
+push double(838.15)
+div
+assert float(379.04)
+push int16(28779)
+push int8(79)
+mod
+assert int8(79)
+push double(501.15)
+push int32(30884)
+mod
+assert int32(30884)
+push int16(53)
+push double(794.28)
+sub
+assert double(794.28)
+push double(763.49)
+push int32(32042)
+add
+assert double(763.49)
+push float(161.74)
+push float(927.26)
+mod
+assert float(161.74)
+push int16(27937)
+push int16(28494)
+mod
+assert int16(28494)
+push int16(14353)
+push float(132.34)
+mul
+assert float(132.34)
+push float(304.87)
+push double(552.2)
+mul
+assert float(304.87)
+push float(912.23)
+push int8(59)
+mod
+assert int8(59)
+push float(972.46)
+push int16(8151)
+add
+assert float(972.46)
+push int8(93)
+push int8(105)
+mul
+assert int8(105)
+print
+push int8(73)
+push int8(61)
+mul
+assert int8(61)
+print
+push int16(21507)
+push int16(19301)
+div
+assert int16(19301)
+push float(245.32)
+push double(681.43)
+div
+assert double(681.43)
+push float(37.92)
+push float(627.75)
+mul
+assert float(37.92)
+push int8(49)
+push int32(27638)
+sub
+assert int32(27638)
+print
+push int32(32067)
+push int32(23434)
+mod
+assert int32(23434)
+push int8(79)
+push int16(5358)
+mul
+assert int16(5358)
+print
+push int32(11008)
+push float(263.54)
+sub
+assert float(263.54)
+push int32(21619)
+push float(581.78)
+mod
+assert int32(21619)
+push double(515.79)
+push int16(3714)
+div
+assert double(515.79)
+push double(681.38)
+push int8(22)
+mul
+assert int8(22)
+push float(79.19)
+push int8(110)
+add
+assert int8(110)
+push double(690.41)
+push float(239.31)
+mul
+assert double(690.41)
+push float(942.4)
+push int32(24433)
+div
+assert float(942.4)
+push int32(10857)
+push int32(29762)
+mod
+assert int32(10857)
+push int32(30057)
+push int16(8805)
+mul
+assert int16(8805)
+push float(107.56)
+push int32(8747)
+div
+assert float(107.56)
+push float(141.69)
+push int8(105)
+mul
+assert int8(105)
+push int8(126)
+push float(548.32)
+mul
+assert int8(126)
+print
+push int16(5882)
+push float(128.9)
+div
+assert float(128.9)
+push int32(14171)
+push int32(17500)
+mod
+assert int32(17500)
+push int8(44)
+push int8(37)
+add
+assert int8(37)
+print
+push int8(111)
+push int16(18289)
+add
+assert int8(111)
+print
+push int16(15407)
+push float(993.1)
+mul
+assert int16(15407)
+push float(916.46)
+push double(717.51)
+sub
+assert float(916.46)
+push int16(20416)
+push int8(3)
+div
+assert int8(3)
+push int32(30484)
+push int16(5538)
+sub
+assert int32(30484)
+push float(728.69)
+push int32(6096)
+mod
+assert int32(6096)
+push int16(23148)
+push int16(26946)
+div
+assert int16(23148)
+push double(134.37)
+push float(136.21)
+mod
+assert float(136.21)
+push int16(22824)
+push double(458.21)
+mod
+assert int16(22824)
+push float(764.31)
+push double(542.67)
+mul
+assert double(542.67)
+push float(798.11)
+push float(14.68)
+sub
+assert float(14.68)
+push int32(18943)
+push int32(18805)
+div
+assert int32(18805)
+push int8(10)
+push double(874.04)
+mod
+assert int8(10)
+print
+push float(408.06)
+push int32(15079)
+div
+assert float(408.06)
+push int32(13681)
+push int32(21590)
+mul
+assert int32(13681)
+push int32(28319)
+push double(537.33)
+mul
+assert int32(28319)
+push double(878.67)
+push int8(58)
+add
+assert int8(58)
+push float(185.0)
+push double(406.9)
+add
+assert float(185.0)
+push double(956.57)
+push int32(13259)
+div
+assert int32(13259)
+push int8(104)
+push int32(24382)
+mul
+assert int32(24382)
+print
+push double(350.37)
+push int8(89)
+sub
+assert double(350.37)
+push double(367.23)
+push int32(24622)
+add
+assert double(367.23)
+push double(631.45)
+push double(739.71)
+mul
+assert double(739.71)
+push double(192.63)
+push int32(10325)
+sub
+assert int32(10325)
+push double(778.42)
+push int32(6294)
+div
+assert double(778.42)
+push int32(18557)
+push double(917.33)
+add
+assert double(917.33)
+push double(13.66)
+push double(178.03)
+mul
+assert double(178.03)
+push int8(54)
+push float(13.01)
+mod
+assert int8(54)
+print
+push float(937.4)
+push float(279.04)
+mul
+assert float(279.04)
+push double(649.33)
+push int16(19473)
+add
+assert int16(19473)
+push float(76.23)
+push double(379.04)
+add
+assert double(379.04)
+push int8(29)
+push int8(40)
+sub
+assert int8(29)
+print
+push double(343.62)
+push int8(21)
+div
+assert int8(21)
+push double(737.53)
+push double(20.4)
+div
+assert double(20.4)
+push int8(93)
+push double(53.98)
+div
+assert int8(93)
+print
+push float(785.21)
+push float(280.14)
+mod
+assert float(785.21)
+push float(506.36)
+push double(917.7)
+mod
+assert double(917.7)
+push int16(26199)
+push float(46.98)
+add
+assert float(46.98)
+push int32(11902)
+push float(569.72)
+div
+assert int32(11902)
+push double(875.91)
+push int8(11)
+div
+assert int8(11)
+push int16(18950)
+push double(986.43)
+add
+assert double(986.43)
+push float(186.75)
+push double(932.76)
+sub
+assert float(186.75)
+push double(321.42)
+push int16(32077)
+mul
+assert double(321.42)
+push float(982.0)
+push int32(21086)
+mod
+assert float(982.0)
+push int16(15624)
+push int32(25927)
+mod
+assert int16(15624)
+push int32(9852)
+push double(230.74)
+mul
+assert int32(9852)
+push int16(27994)
+push int16(12367)
+mod
+assert int16(12367)
+push int16(1316)
+push int32(25580)
+mul
+assert int16(1316)
+push int16(197)
+push double(965.1)
+div
+assert double(965.1)
+push int16(25094)
+push double(486.58)
+mod
+assert double(486.58)
+push int16(13032)
+push double(32.63)
+mul
+assert int16(13032)
+push float(249.89)
+push int8(109)
+mod
+assert int8(109)
+push double(772.8)
+push double(262.75)
+mod
+assert double(262.75)
+push float(822.19)
+push float(454.78)
+mod
+assert float(822.19)
+push int16(26995)
+push double(902.86)
+add
+assert int16(26995)
+push int32(7381)
+push double(261.46)
+mul
+assert int32(7381)
+push float(69.7)
+push int32(16329)
+sub
+assert int32(16329)
+push float(345.39)
+push int8(56)
+div
+assert float(345.39)
+push int8(103)
+push int32(21025)
+sub
+assert int32(21025)
+print
+push double(112.44)
+push int32(31924)
+sub
+assert int32(31924)
+push float(125.36)
+push float(498.07)
+div
+assert float(125.36)
+push int32(20497)
+push int16(6347)
+div
+assert int16(6347)
+push double(547.16)
+push int32(10668)
+mul
+assert int32(10668)
+push float(180.38)
+push int16(22482)
+sub
+assert int16(22482)
+push double(784.82)
+push int32(8710)
+mod
+assert int32(8710)
+push double(615.99)
+push int8(47)
+div
+assert double(615.99)
+push double(953.92)
+push double(312.53)
+mul
+assert double(312.53)
+push int32(5423)
+push int16(3374)
+mul
+assert int32(5423)
+push int16(31325)
+push int8(83)
+sub
+assert int8(83)
+push double(125.24)
+push double(525.57)
+mul
+assert double(125.24)
+push int16(29649)
+push float(278.97)
+mul
+assert float(278.97)
+push int16(27478)
+push double(888.68)
+add
+assert int16(27478)
+push double(71.54)
+push int16(9996)
+mul
+assert double(71.54)
+push float(168.08)
+push double(602.25)
+sub
+assert double(602.25)
+push int16(13531)
+push int16(14826)
+add
+assert int16(13531)
+push int8(81)
+push float(159.1)
+mod
+assert int8(81)
+print
+push double(860.58)
+push float(40.98)
+div
+assert double(860.58)
+push int16(1034)
+push int8(50)
+mul
+assert int8(50)
+push float(714.12)
+push double(49.22)
+sub
+assert float(714.12)
+push int16(9904)
+push float(554.64)
+add
+assert int16(9904)
+push double(936.19)
+push int16(12828)
+sub
+assert int16(12828)
+push double(149.09)
+push int16(5136)
+add
+assert int16(5136)
+push float(916.08)
+push int16(17002)
+mul
+assert float(916.08)
+push int32(1983)
+push double(301.43)
+add
+assert double(301.43)
+push int8(38)
+push int32(20054)
+div
+assert int32(20054)
+print
+push int8(83)
+push int16(29740)
+mod
+assert int8(83)
+print
+push float(774.46)
+push float(491.99)
+mod
+assert float(774.46)
+push int32(5059)
+push double(247.56)
+mod
+assert double(247.56)
+push int8(82)
+push int32(335)
+mod
+assert int8(82)
+print
+push float(73.59)
+push int16(23582)
+div
+assert int16(23582)
+push double(506.15)
+push float(356.77)
+add
+assert double(506.15)
+push int16(24933)
+push int8(37)
+mul
+assert int8(37)
+push float(908.37)
+push float(735.0)
+add
+assert float(908.37)
+push int32(20418)
+push double(339.9)
+mul
+assert int32(20418)
+push float(912.0)
+push int8(57)
+mul
+assert float(912.0)
+push float(588.48)
+push int16(12644)
+div
+assert float(588.48)
+exit

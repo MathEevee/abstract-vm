@@ -95,10 +95,6 @@ std::vector<std::string>    ParseLine(std::string line)
     }
     if (str != "")
         args.push_back(str);
-    /*for (std::vector<std::string>::iterator it = args.begin(); it != args.end(); it++)
-    {
-        std::cout << "args = " << *it << std::endl;
-    }*/
     
     return (args);
 }

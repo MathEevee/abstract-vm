@@ -11,7 +11,7 @@ const char* AVMExceptions::what() const noexcept
 
 error    AVMExceptions::handle() const //ajouter ici d'autres params pour mettre des précisions (num de ligne + la ligne)
 {
-    std::cerr << what() << std::endl;
+    std::cerr << "Line " << g_line_error << " : Error : " << what() << std::endl;
     #ifndef BONUS
         return Manda_succes;
     #else

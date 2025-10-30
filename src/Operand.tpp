@@ -1,6 +1,7 @@
 #include "Operand.hpp"
 #include "Utils.hpp"
 
+
 template<typename Unit, eOperandType Type>
 Operand<Unit, Type>::Operand(std::string const &value)
 {
@@ -24,37 +25,39 @@ eOperandType Operand<Unit, Type>::getType( void ) const
 }
 
 template<typename Unit, eOperandType Type>
-std::string const & Operand<Unit, Type>::toString( void ) const // String representation of the instance
+std::string const & Operand<Unit, Type>::toString( void ) const
 {
     return (_str);
 }
 
 template<typename Unit, eOperandType Type>
-IOperand const * Operand<Unit, Type>::operator+( IOperand const & rhs ) const // Sum
+eOperandType Operand<Unit, Type>::chooseType( IOperand const & lhs, IOperand const & rhs ) const
+{
+    eOperandType new_type = lhs.getType();
+    if (lhs.getPrecision() < rhs.getPrecision())
+        new_type = rhs.getType();
+    return (new_type);
+}
+
+
+template<typename Unit, eOperandType Type>
+IOperand const * Operand<Unit, Type>::operator+( IOperand const & rhs ) const
 {
     double result;
-    eOperandType type = this->getType();
+    eOperandType type = chooseType(*this, rhs);
 
-    if (this->getPrecision() < rhs.getPrecision())
-        type = rhs.getType();
-
-    result = std::stod(this->toString()) + std::stod(rhs.toString()); //voir overflow
+    result = std::stod(this->toString()) + std::stod(rhs.toString());
 
     checkRange(Double, std::to_string(result));
     OperandFactory factory;
     return (factory.createOperand(type, std::to_string(result)));
 }
 
-
-
 template<typename Unit, eOperandType Type>
-IOperand const * Operand<Unit, Type>::operator-( IOperand const & rhs ) const // Difference
+IOperand const * Operand<Unit, Type>::operator-( IOperand const & rhs ) const
 {
     double result;
-    eOperandType type = this->getType();
-
-    if (this->getPrecision() < rhs.getPrecision())
-        type = rhs.getType();
+    eOperandType type = chooseType(*this, rhs);
 
     result = std::stod(this->toString()) - std::stod(rhs.toString());
     OperandFactory factory;
@@ -63,48 +66,42 @@ IOperand const * Operand<Unit, Type>::operator-( IOperand const & rhs ) const //
 
 
 template<typename Unit, eOperandType Type>
-IOperand const * Operand<Unit, Type>::operator*( IOperand const & rhs ) const // Product
+IOperand const * Operand<Unit, Type>::operator*( IOperand const & rhs ) const
 {
     double result;
-    eOperandType type = this->getType();
+    eOperandType type = chooseType(*this, rhs);
 
-    if (this->getPrecision() < rhs.getPrecision())
-        type = rhs.getType();
     result = std::stod(this->toString()) * std::stod(rhs.toString());
     OperandFactory factory;
     return (factory.createOperand(type, std::to_string(result)));
 }
 
 template<typename Unit, eOperandType Type>
-IOperand const * Operand<Unit, Type>::operator/( IOperand const & rhs ) const // Quotient
+IOperand const * Operand<Unit, Type>::operator/( IOperand const & rhs ) const
 {
     double result;
-    eOperandType type = this->getType();
+    eOperandType type = chooseType(*this, rhs);
 
-    if (this->getPrecision() < rhs.getPrecision())
-        type = rhs.getType();
     if (std::stod(rhs.toString()) == 0)
         throw ModDivNullException();
+
     result = std::stod(this->toString()) / std::stod(rhs.toString());
     OperandFactory factory;
     return (factory.createOperand(type, std::to_string(result)));
 }
 
 template<typename Unit, eOperandType Type>
-IOperand const * Operand<Unit, Type>::operator%( IOperand const & rhs ) const // Modulo
+IOperand const * Operand<Unit, Type>::operator%( IOperand const & rhs ) const
 {
     double result;
-    eOperandType type = this->getType();
+    eOperandType type = chooseType(*this, rhs);
 
-    if (this->getPrecision() < rhs.getPrecision())
-        type = rhs.getType();
     if (std::stod(rhs.toString()) == 0)
         throw ModDivNullException();
     if (type == Int8 || type == Int16 || type == Int32)
         result = static_cast<long long>(std::stod(this->toString())) % static_cast<long long>(std::stod(rhs.toString()));
     else
         result = std::fmod(std::stod(this->toString()), std::stod(rhs.toString()));
-    // result = std::stod(this->toString()) % std::stod(rhs.toString());
     OperandFactory factory;
     return (factory.createOperand(type, std::to_string(result)));
 }
@@ -112,9 +109,9 @@ IOperand const * Operand<Unit, Type>::operator%( IOperand const & rhs ) const //
 template<typename Unit, eOperandType Type>
 bool Operand<Unit, Type>::operator==(IOperand const & rhs) const
 {
-    std::cout << "ca passe la ?" << std::endl;
-    if (this->getType() == rhs.getType() && this->getPrecision() == rhs.getPrecision())
+    if (this->getType() == rhs.getType() && this->toString() == rhs.toString())
         return (true);
+
     return (false);
 }
 

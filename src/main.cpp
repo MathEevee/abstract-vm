@@ -12,31 +12,6 @@
 #include "Parser.hpp"
 #include "StackOperand.hpp"
 
-void test(int a)
-{
-    if (a == 0)
-        throw ModDivNullException();
-}
-
-void test_f()
-{
-    int a = 0;
-    try {
-        test(a);
-    }
-    catch (const AVMExceptions &e)
-    {
-        e.what();
-    }
-    try {
-        test(a);
-    }
-    catch (const AVMExceptions &e)
-    {
-        e.what();
-    }
-}
-
 void    open_file(std::ifstream &input, error &bonus)
 {
     bool    exit = false;
@@ -44,18 +19,17 @@ void    open_file(std::ifstream &input, error &bonus)
     std::vector<std::string> parse_line;
     StackOperand my_stack;
     std::string line = "";
-    int i = 0;
     while (getline(input, line, '\n'))
     {
         parse_line = ParseLine(line);
         exit = my_stack.checkOp(parse_line, bonus);
         if (bonus == Manda_failed || exit == true)
             break;
-        i++;
+        increment();
     }
     if (exit == false && bonus != Manda_failed)
         throw NoExitException();
-    my_stack.print_all(); //suppr
+    // my_stack.print_all(); //suppr
 }
 
 void    open_term(error &bonus)
@@ -64,7 +38,6 @@ void    open_term(error &bonus)
     std::vector<std::string> parse_line;
     StackOperand my_stack;
     std::string line = "";
-    int i = 0;
     while (getline(std::cin, line, '\n'))
     {
         if (line == ";;")
@@ -73,11 +46,12 @@ void    open_term(error &bonus)
         {
             parse_line = ParseLine(line);
             exit = my_stack.checkOp(parse_line, bonus);
-            i++;
+            increment();
         }
     }
     if (exit == false)
         throw NoExitException();
+    // my_stack.print_all(); //suppr
 }
 
 int main(int ac, char **av)
@@ -100,7 +74,7 @@ int main(int ac, char **av)
     }
     catch (const AVMExceptions &e)
     {
-        std::cerr << e.handle() << std::endl;
+        e.handle();
     }
-    return 1;
+    return (0);
 }

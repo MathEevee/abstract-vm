@@ -8,7 +8,10 @@
 #include <iostream>
 #include "IOperand.hpp"
 
-void            checkRange(eOperandType type, std::string const &value);
+extern int g_line_error;
 
+
+void            checkRange(eOperandType type, std::string const &value);
+void            increment();
 
 #endif

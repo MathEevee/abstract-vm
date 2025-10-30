@@ -31,12 +31,11 @@ bool     StackOperand::comment(void)
     return (true);
 }
 
-bool     StackOperand::push(std::string args)
+bool StackOperand::createElem(std::string args, const IOperand *&new_elem) const
 {
     std::smatch matches;
     std::regex pattern(VALUE_PATTERN);
     const OperandFactory new_operand;
-    const IOperand *new_elem;
     try {
 
         if (!std::regex_match(args, matches, pattern))
@@ -49,7 +48,6 @@ bool     StackOperand::push(std::string args)
         }
         else
             new_elem = new_operand.createOperand(type, matches[2]);
-        this->_stack.push(new_elem);
         return (true);
     }
     catch (const AVMExceptions &e)
@@ -60,6 +58,43 @@ bool     StackOperand::push(std::string args)
     }
 }
 
+bool     StackOperand::push(std::string args)
+{
+    const IOperand *new_elem = NULL;
+    bool res = createElem(args, new_elem);
+    if (new_elem == NULL && res == false)
+        return (false);
+    if (new_elem != NULL)
+        this->_stack.push(new_elem);
+    return (true);
+}
+
+bool StackOperand::assert(std::string args)
+{
+    const IOperand *check = NULL;
+    bool res = createElem(args, check);
+    if (check == NULL && res == false)
+        return (false);
+    try {
+        if (*check == *(this->_stack.top()))
+        {
+            delete (check);
+            return (true);
+        }
+        else
+        {
+            delete (check);
+            throw AssertFalseException();
+        }
+    }
+    catch (const AVMExceptions &e)
+    {
+        if (e.handle() == Bonus)
+            return (true);
+        return (false);
+    }
+}
+    
 bool     StackOperand::dump()
 {
     std::stack<const IOperand *> tmp = this->_stack;
@@ -90,160 +125,35 @@ bool     StackOperand::pop()
     }
 }
 
-bool     StackOperand::add()
-{
-    const IOperand *a = NULL;
-    const IOperand *b = NULL;
-    try {
-        if (this->_stack.size() < 2)
-            throw ArithmeticException();
-        a = this->_stack.top();
-        this->_stack.pop();
-        b = this->_stack.top();
-        this->_stack.pop();
-        const IOperand *result = b->operator+(*a);
-        delete (a);
-        delete (b);
-        this->_stack.push(result);
-        return (true);
-    }
-    catch (const AVMExceptions &e)
-    {
-        if (b != NULL)
-            this->_stack.push(b);
-        if (a != NULL)
-            this->_stack.push(a);
-        if (e.handle() == Bonus)
-            return (true);
-        return (false);
-    }
-}
-
-bool     StackOperand::mod()
-{
-    const IOperand *a = NULL;
-    const IOperand *b = NULL;
-    try {
-        if (this->_stack.size() < 2)
-            throw ArithmeticException();
-        a = this->_stack.top();
-        this->_stack.pop();
-        b = this->_stack.top();
-        this->_stack.pop();
-        const IOperand *result = b->operator%(*a);
-        delete (a);
-        delete (b);
-        this->_stack.push(result);
-        return (true);
-    }
-    catch (const AVMExceptions &e)
-    {
-        if (b != NULL)
-            this->_stack.push(b);
-        if (a != NULL)
-            this->_stack.push(a);
-        if (e.handle() == Bonus)
-            return (true);
-        return (false);
-    }
-}
-
-bool    StackOperand::sub()
-{
-    const IOperand *a = NULL;
-    const IOperand *b = NULL;
-    try {
-        if (this->_stack.size() < 2)
-            throw ArithmeticException();
-        a = this->_stack.top();
-        this->_stack.pop();
-        b = this->_stack.top();
-        this->_stack.pop();
-        const IOperand *result = b->operator-(*a);
-        delete (a);
-        delete (b);
-        this->_stack.push(result);
-        return (true);
-    }
-    catch (const AVMExceptions &e)
-    {
-        if (b != NULL)
-            this->_stack.push(b);
-        if (a != NULL)
-            this->_stack.push(a);
-        if (e.handle() == Bonus)
-            return (true);
-        return (false);
-    }
-}
-
-bool    StackOperand::mul()
-{
-    const IOperand *a = NULL;
-    const IOperand *b = NULL;
-    try {
-        if (this->_stack.size() < 2)
-            throw ArithmeticException();
-        a = this->_stack.top();
-        this->_stack.pop();
-        b = this->_stack.top();
-        this->_stack.pop();
-        const IOperand *result = b->operator*(*a);
-        delete (a);
-        delete (b);
-        this->_stack.push(result);
-        return (true);
-    }
-    catch (const AVMExceptions &e)
-    {
-        if (b != NULL)
-            this->_stack.push(b);
-        if (a != NULL)
-            this->_stack.push(a);
-        if (e.handle() == Bonus)
-            return (true);
-        return (false);
-    }
-}
-
-bool    StackOperand::div()
-{
-    const IOperand *a = NULL;
-    const IOperand *b = NULL;
-    try {
-        if (this->_stack.size() < 2)
-            throw ArithmeticException();
-        a = this->_stack.top();
-        this->_stack.pop();
-        b = this->_stack.top();
-        this->_stack.pop();
-        const IOperand *result = b->operator/(*a);
-        delete (a);
-        delete (b);
-        this->_stack.push(result);
-        return (true);
-    }
-    catch (const AVMExceptions &e)
-    {
-        if (b != NULL)
-            this->_stack.push(b);
-        if (a != NULL)
-            this->_stack.push(a);
-        if (e.handle() == Bonus)
-            return (true);
-        return (false);
-    }
-}
-
 bool StackOperand::exit(void)
 {
     return (true);
 }
 
-bool StackOperand::assert(std::string args)
-{
 
-	/*const IOperand *a = NULL;
+bool    StackOperand::print()
+{
+    try {
+        if (this->_stack.top()->getType() == Int8)
+        {
+            std::cout << static_cast<char>(std::atoi((this->_stack.top()->toString().c_str()))) << std::endl;
+            return (true);
+        }
+        else
+            throw AssertFalseException();
+    }
+    catch (const AVMExceptions &e)
+    {
+        if (e.handle() == Bonus)
+            return (true);
+        return (false);
+    }
+    
+}
+
+bool    StackOperand::calc_operator(const IOperand* (IOperand::*my_operator)(const IOperand&) const)
+{
+    const IOperand *a = NULL;
     const IOperand *b = NULL;
     try {
         if (this->_stack.size() < 2)
@@ -252,44 +162,42 @@ bool StackOperand::assert(std::string args)
         this->_stack.pop();
         b = this->_stack.top();
         this->_stack.pop();
-        const IOperand *result = b->operator/(*a);
+        const IOperand *result = (b->*my_operator)(*a);
         delete (a);
         delete (b);
         this->_stack.push(result);
         return (true);
-    }*/
-	const IOperand *a = NULL;
-	std::smatch matches;
-    std::regex pattern(VALUE_PATTERN);
-    const OperandFactory new_operand;
-    const IOperand *new_elem;
-    try {
-
-        if (!std::regex_match(args, matches, pattern))
-            throw LexicalErrorException();
-        eOperandType type = parseType(matches[1]);
-        if (matches[1] == "")
-        {
-            type = parseType(matches[3]);
-            new_elem = new_operand.createOperand(type, matches[4]);
-        }
-        else
-            new_elem = new_operand.createOperand(type, matches[2]);
-		a = this->_stack.top();
-		if (a == new_elem)
-		{
-			std::cout << "check ici" << std::endl;
-		}
-		else
-			std::cout << "C'es fo" << std::endl;
-	}
-	catch (const AVMExceptions &e)
-	{
-		if (e.handle() == Bonus)
+    }
+    catch (const AVMExceptions &e)
+    {
+        if (b != NULL)
+            this->_stack.push(b);
+        if (a != NULL)
+            this->_stack.push(a);
+        if (e.handle() == Bonus)
             return (true);
-		return (false);
+        return (false);
+    }
+}
+
+bool    StackOperand::search_operator(Instruction instr)
+{
+    Instruction instructions[5] = {Add, Sub, Mul, Div, Mod};
+    IOperand const* (IOperand::*functptr[])(IOperand const&) const = {
+        &IOperand::operator+,
+        &IOperand::operator-,
+        &IOperand::operator*,
+        &IOperand::operator/,
+        &IOperand::operator%
+    };
+    int i = 0;
+    for (int j = 0; j <= 4; j++)
+	{
+		if (instr == instructions[j])
+			break;
+		i++;
 	}
-	return (false);
+    return (calc_operator(functptr[i]));
 }
 
 
@@ -308,28 +216,18 @@ bool    StackOperand::execInstr(std::string args, Instruction instr)
         case Assert:
             return (assert(args));
 		case Print:
-        	// break;
+        	return (print());
 		case Exit:
         	return (exit());
-		case Add: //op
-			return (add());
-		case Sub://op
-			return (sub());
-		case Mul://op
-			return (mul());
-		case Div://op
-			return (div());
-		case Mod://op
-			return (mod());
-        default:
+        case UNKNOWN:
         {
             throw NotAnInstructionException();
             return (false);
-        } //mettre le default pour les op et ajouter la case UNKNOW après le exit
+        }
+        default:
+            return (search_operator(instr));
     }
-    return (true);
 }
-
 
 bool     StackOperand::checkOp(std::vector<std::string> args, error &bonus)
 {
