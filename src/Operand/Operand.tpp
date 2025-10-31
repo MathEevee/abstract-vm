@@ -4,16 +4,24 @@
 template<typename Unit, eOperandType Type>
 Operand<Unit, Type>::Operand(std::string const &value)
 {
+    std::cout << "check = " << value << std::endl;
     _value = static_cast<Unit>(std::stod(value));
     if (Type == Int8 || Type == Int16 || Type == Int32)
         _str = std::to_string(static_cast<int>(_value));
     else
     {
-        std::string tmp = value.substr(0, value.find_last_not_of('0') + 1);
-        if (tmp[tmp.length() - 1] == '.')
-            tmp = tmp.substr(0, tmp.length() - 1);
-        _str = tmp;
+        if (value.find('.') != std::string::npos)
+        {
+            std::string tmp = value.substr(0, value.find_last_not_of('0') + 1);
+            std::cout << "check into = " << tmp << std::endl;
+            if (tmp[tmp.length() - 1] == '.')
+                tmp = tmp.substr(0, tmp.length() - 1);
+            _str = tmp;
+        }
+        else
+            _str = value;
     }
+    std::cout << "check after = " << _str << std::endl;
 }
 
 template<typename Unit, eOperandType Type>
