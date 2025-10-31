@@ -17,6 +17,28 @@ Operand<Unit, Type>::Operand(std::string const &value)
 }
 
 template<typename Unit, eOperandType Type>
+Operand<Unit, Type>::Operand(Operand const & rhs)
+{
+    *this = rhs;
+}
+
+template<typename Unit, eOperandType Type>
+Operand<Unit, Type>::Operand(void) : _value(static_cast<Unit>(0)), _str("0")
+{}
+
+
+template<typename Unit, eOperandType Type>
+Operand<Unit, Type>& Operand<Unit, Type>::operator=(Operand const & rhs)
+{
+    if (this != &rhs)
+    {
+        this->_value = rhs._value;
+        this->_str = rhs._str;
+    }
+    return (*this);
+}
+
+template<typename Unit, eOperandType Type>
 int Operand<Unit, Type>::getPrecision( void ) const
 {
     return (static_cast<int>(Type));

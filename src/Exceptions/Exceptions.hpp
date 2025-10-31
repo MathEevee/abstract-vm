@@ -4,7 +4,6 @@
 #include <exception>
 #include "../Utils/Utils.hpp"
 
-
 enum error {
     Manda_succes,
     Manda_failed,

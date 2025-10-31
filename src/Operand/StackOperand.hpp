@@ -11,6 +11,9 @@ class StackOperand {
     
         std::stack<const IOperand *>    _stack;
 
+        StackOperand& operator=(StackOperand const & rhs);
+
+
         bool    comment(void);
         bool    exit(void);
         bool    push(std::string args);
@@ -24,12 +27,12 @@ class StackOperand {
         bool    createElem(std::string args, const IOperand *&new_elem) const;
 
     public :
+        StackOperand(StackOperand const & rhs);
+
         StackOperand();
         ~StackOperand();
         bool        checkOp(std::vector<std::string> args, error &bonus);
         bool        execInstr(std::string args, Instruction instr);
-
-
 };
 
 #endif

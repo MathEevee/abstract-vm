@@ -11,6 +11,11 @@ class Operand : public IOperand
     private :
         Unit            _value;
         std::string     _str;
+
+        Operand(Operand const & rhs);
+        Operand(void);
+        Operand<Unit, Type>& operator=(Operand const & rhs);
+
     public :
         Operand(std::string const &value);
         

@@ -1,7 +1,0 @@
-- faire un tester
-- voir pour print l'erreur dans l'instruction 
-{
-    args invalide dans : - push
-                         - assert
-    instruction inconnu
-}

@@ -3,6 +3,30 @@
 StackOperand::StackOperand()
 {}
 
+StackOperand::StackOperand(StackOperand const & rhs)
+{
+    *this = rhs;
+}
+
+StackOperand& StackOperand::operator=(StackOperand const & rhs)
+{
+    std::stack<const IOperand *> tmp = rhs._stack;
+    const OperandFactory new_operand;
+
+    if (this != &rhs)
+    {
+        while (!this->_stack.empty())
+            this->_stack.pop();
+    
+        while (!tmp.empty())
+        {
+            this->_stack.push(new_operand.createOperand(tmp.top()->getType(), tmp.top()->toString()));
+            tmp.pop();
+        }
+    }
+
+    return (*this);
+}
 
 StackOperand::~StackOperand()
 {
@@ -253,4 +277,3 @@ bool     StackOperand::checkOp(std::vector<std::string> args, error &bonus)
         return (true);
     return (false);
 }
-
