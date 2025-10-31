@@ -2,8 +2,7 @@
 #define EXCEPTIONS_HPP
 
 #include <exception>
-#include <iostream>
-#include "Utils.hpp"
+#include "../Utils/Utils.hpp"
 
 
 enum error {

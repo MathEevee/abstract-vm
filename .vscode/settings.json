@@ -62,6 +62,8 @@
         "bitset": "cpp",
         "queue": "cpp",
         "ranges": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "climits": "cpp",
+        "cfloat": "cpp"
     }
 }

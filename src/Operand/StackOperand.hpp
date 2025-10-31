@@ -3,11 +3,8 @@
 
 #include <stack>
 #include <vector>
-#include "IOperand.hpp"
 #include "Operand.hpp"
-#include "Parser.hpp"
-#include <iostream>
-#include <string>
+#include "../Parser/Parser.hpp"
 
 class StackOperand {
     private :
@@ -21,15 +18,12 @@ class StackOperand {
         bool    dump(void);
         bool    assert(std::string arg);
         bool    print();
-        bool    unknow(std::string unknow_cmd);
+        bool    unknow();
         bool    search_operator(Instruction instr);
         bool    calc_operator(const IOperand* (IOperand::*my_operator)(const IOperand&) const);
         bool    createElem(std::string args, const IOperand *&new_elem) const;
 
     public :
-        void print_all();
-
-
         StackOperand();
         ~StackOperand();
         bool        checkOp(std::vector<std::string> args, error &bonus);

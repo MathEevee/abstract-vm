@@ -1,6 +1,3 @@
-push double(10.42001)
-push double(1)
-mul
-assert double(10.42001)
-dump
-exit
+psd
+sdaa
+add

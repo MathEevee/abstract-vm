@@ -5,7 +5,15 @@ OBJDIRB		:= ./obj_bonus
 NAME		:= avm
 NAME_BONUS	:= avm_bonus
 CC			:= c++
-SRCS 		:= main.cpp Exceptions.cpp MyExceptions.cpp OperandFactory.cpp Utils.cpp Parser.cpp StackOperand.cpp
+SRCS 		:= \
+				main.cpp \
+				Exceptions/Exceptions.cpp \
+				Exceptions/MyExceptions.cpp \
+				Operand/OperandFactory.cpp \
+				Operand/StackOperand.cpp \
+				Utils/Utils.cpp \
+				Parser/Parser.cpp
+
 OBJS		:= $(addprefix $(OBJDIR)/, $(SRCS:.cpp=.o))
 OBJS_BONUS	:= $(addprefix $(OBJDIRB)/, $(SRCS:.cpp=_bonus.o))
 
@@ -22,13 +30,17 @@ $(NAME): $(OBJS)
 $(NAME_BONUS): $(OBJS_BONUS)
 	@$(CC) $(OBJS_BONUS) -o $(NAME_BONUS)
 
+# --- Normal object rule ---
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
-	@test -d $(OBJDIR) || mkdir $(OBJDIR)
-	@$(CC) $(CFLAGS) -o $@ -c $< && printf "$(GREEN)✔️ $(notdir $<) compiled\n"
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@printf "$(GREEN)✔️ $(notdir $<) compiled$(RESET)\n"
 
+# --- Bonus object rule ---
 $(OBJDIRB)/%_bonus.o: $(SRCDIR)/%.cpp
-	@test -d $(OBJDIRB) || mkdir $(OBJDIRB)
-	@$(CC) $(CFLAGS) -DBONUS -c $< -o $@ && printf "$(GREEN)✔️ $(notdir $<) compiled\n"
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -DBONUS -c $< -o $@
+	@printf "$(GREEN)✔️ $(notdir $<) [bonus] compiled$(RESET)\n"
 
 clean:
 	@rm -rf $(OBJDIR)

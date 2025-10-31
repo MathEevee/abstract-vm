@@ -13,19 +13,6 @@ StackOperand::~StackOperand()
     }
 }
 
-void     StackOperand::print_all(void)
-{
-    std::stack<const IOperand *> tmp = this->_stack;
-    const IOperand *print_tmp;
-    while (!tmp.empty())
-    {
-        // std::cout << tmp.size() << std::endl;
-        print_tmp = tmp.top();
-        std::cout << "my_value = " << print_tmp->toString() << std::endl;
-        tmp.pop();
-    }
-}
-
 bool     StackOperand::comment(void)
 {
     return (true);
@@ -199,14 +186,14 @@ bool    StackOperand::search_operator(Instruction instr)
     return (calc_operator(functptr[i]));
 }
 
-bool    StackOperand::unknow(std::string unknow_cmd)
+bool    StackOperand::unknow()
 {
     try {
         throw NotAnInstructionException();
     }
     catch (const AVMExceptions &e)
     {
-        if (e.handle(unknow_cmd) == Bonus)
+        if (e.handle() == Bonus)
             return (true);
         return (false);
     }
@@ -231,7 +218,7 @@ bool    StackOperand::execInstr(std::string args, Instruction instr)
 		case Exit:
         	return (exit());
         case UNKNOWN:
-            return (unknow(args));
+            return (unknow());
         default:
             return (search_operator(instr));
     }

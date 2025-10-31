@@ -1,8 +1,8 @@
 ; -------------
 ; mod_test.avm -
 ; -------------
-push double(1.0)
-push int8(33)
+push double(8.00001)
+push double(3.0)
 mod
 dump
 exit

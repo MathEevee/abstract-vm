@@ -1,5 +1,4 @@
-#include "Operand.hpp"
-#include "Utils.hpp"
+#include "../Utils/Utils.hpp"
 
 
 template<typename Unit, eOperandType Type>
@@ -9,7 +8,12 @@ Operand<Unit, Type>::Operand(std::string const &value)
     if (Type == Int8 || Type == Int16 || Type == Int32)
         _str = std::to_string(static_cast<int>(_value));
     else
-        _str = value.substr(0, value.find_last_not_of('0') + 1);
+    {
+        std::string tmp = value.substr(0, value.find_last_not_of('0') + 1);
+        if (tmp[tmp.length() - 1] == '.')
+            tmp = tmp.substr(0, tmp.length() - 1);
+        _str = tmp;
+    }
 }
 
 template<typename Unit, eOperandType Type>
@@ -38,7 +42,6 @@ eOperandType Operand<Unit, Type>::chooseType( IOperand const & lhs, IOperand con
         new_type = rhs.getType();
     return (new_type);
 }
-
 
 template<typename Unit, eOperandType Type>
 IOperand const * Operand<Unit, Type>::operator+( IOperand const & rhs ) const

@@ -9,7 +9,7 @@ const char* AVMExceptions::what() const noexcept
     return (_msg);
 }
 
-error    AVMExceptions::handle() const //ajouter ici d'autres params pour mettre des précisions (num de ligne + la ligne)
+error    AVMExceptions::handle() const
 {
     std::cerr << "Line " << g_line_error << " : Error : " << what() << std::endl;
     #ifndef BONUS
@@ -28,4 +28,3 @@ error    AVMExceptions::handle(std::string more_information) const
         return Bonus;
     #endif
 }
-

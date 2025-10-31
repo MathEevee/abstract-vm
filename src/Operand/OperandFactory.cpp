@@ -1,6 +1,5 @@
-#include "OperandFactory.hpp"
 #include "Operand.hpp"
-#include "Utils.hpp"
+#include "../Utils/Utils.hpp"
 
 IOperand const *OperandFactory::createOperand(eOperandType type, std::string const &value) const
 {

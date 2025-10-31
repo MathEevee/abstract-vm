@@ -2,12 +2,7 @@
 #define OPERANDFACTORY_HPP
 
 #include "IOperand.hpp"
-#include <limits>
-#include <string>
-#include <cmath>
-#include <cfloat>
-#include <iostream>
-
+#include "OperandFactory.hpp"
 
 class OperandFactory
 {

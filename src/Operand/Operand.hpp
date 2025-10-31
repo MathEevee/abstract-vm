@@ -2,8 +2,7 @@
 #define OPERAND_HPP
 
 #include "OperandFactory.hpp"
-#include "MyExceptions.hpp"
-
+#include "../Exceptions/MyExceptions.hpp"
 
 
 template<typename Unit, eOperandType Type>

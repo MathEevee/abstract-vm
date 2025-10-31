@@ -1,5 +1,5 @@
 #include "Utils.hpp"
-#include "MyExceptions.hpp"
+#include "../Exceptions/MyExceptions.hpp"
 
 int g_line_error = 0;
 
