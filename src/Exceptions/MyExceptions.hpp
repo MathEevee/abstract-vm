@@ -58,6 +58,12 @@ class AssertFalseException : public AVMExceptions
         AssertFalseException();
 };
 
+class AssertEmptyException : public AVMExceptions
+{
+    public :
+        AssertEmptyException();
+};
+
 class NotAnInstructionException : public AVMExceptions
 {
     public :

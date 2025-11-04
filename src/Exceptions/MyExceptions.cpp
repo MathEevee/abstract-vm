@@ -27,6 +27,9 @@ PrintFalseException::PrintFalseException() : AVMExceptions("Cannot print from an
 MinOrMaxException::MinOrMaxException() : AVMExceptions("Cannot search min or max from an empty stack")
 {}
 
+AssertEmptyException::AssertEmptyException() : AVMExceptions("Cannot assert from an empty stack")
+{}
+
 NotAnInstructionException::NotAnInstructionException() : AVMExceptions("Unknown instruction")
 {}
 

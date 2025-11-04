@@ -1,4 +1,12 @@
-push int8(5)
-push double(5.2001)
+min
 max
-exit
+print
+assert int8(2)
+pop
+dump
+rdump
+add
+mul
+div
+mod
+sub

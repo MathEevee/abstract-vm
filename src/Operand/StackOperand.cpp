@@ -86,19 +86,19 @@ bool StackOperand::assert(std::string args)
     if (check == NULL && res == false)
         return (false);
     try {
+        if (this->_stack.empty())
+            throw AssertEmptyException();
         if (*check == *(this->_stack.top()))
         {
             delete (check);
             return (true);
         }
         else
-        {
-            delete (check);
             throw AssertFalseException();
-        }
     }
     catch (const AVMExceptions &e)
     {
+        delete (check);
         if (e.handle(Assert) == Bonus)
             return (true);
         return (false);
