@@ -25,7 +25,7 @@ class StackOperand {
         bool    max(void); //bonus
         bool    assert(std::string arg);
         bool    print();
-        bool    unknow(std::string args);
+        bool    unknow();
         bool    search_operator(Instruction instr);
         bool    calc_operator(const IOperand* (IOperand::*my_operator)(const IOperand&) const, Instruction instr);
         bool    createElem(std::string args, const IOperand *&new_elem) const;

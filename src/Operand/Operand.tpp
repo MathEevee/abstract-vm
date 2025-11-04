@@ -16,7 +16,7 @@ Operand<Unit, Type>::Operand(std::string const &value)
             _str = tmp;
         }
         else
-            _str = value;
+        _str = value;
     }
 }
 

@@ -1,0 +1,36 @@
+dump
+rdump
+pop
+add
+sub
+mul
+mod
+div
+assert int8(1)
+assert int16(1)
+assert int32(1)
+assert float(1)
+assert double(1)
+print
+push int8(200)
+push int16(99999999999999999999999999999)
+push int32(9999999999999999999999999999999999999999)
+push float(10e40)
+push double(10e1000000)
+push int8(-200)
+push int16(-99999999999999999999999999999)
+push int32(-9999999999999999999999999999999999999999)
+push float(-10e40)
+push double(-10e1000)
+push int8(1)
+add
+sub
+mul
+mod
+div
+assert int8(10)
+assert int16(10)
+assert int32(10)
+assert float(10)
+assert double(10)
+salut ;test all error

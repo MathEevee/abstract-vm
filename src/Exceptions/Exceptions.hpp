@@ -13,6 +13,7 @@ enum error {
 
 class AVMExceptions : public std::exception {
     public :
+        AVMExceptions(std::string msg);
         AVMExceptions(const char *msg);
         const char* what() const noexcept override;
 

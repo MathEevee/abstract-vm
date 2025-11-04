@@ -46,9 +46,20 @@ std::string     instruction_to_string(Instruction my_instruction)
     }
 }
 
+long double safe_stold(const std::string &value)
+{
+    try {
+        return std::stold(value);
+    } 
+    catch (...) {
+        throw OverflowException();
+    } 
+}
+
 void    strcmpRange(double min, double max, std::string const &value)
 {
-    double tmp = std::stod(value);
+    long double tmp = safe_stold(value);
+
     if (std::isinf(tmp))
     {
         if (tmp < 0)
@@ -56,14 +67,11 @@ void    strcmpRange(double min, double max, std::string const &value)
         else
             throw OverflowException();
     }
+
     if (tmp > max)
-    {
         throw OverflowException();
-    }
     else if (tmp < min)
-    {
         throw UnderflowException();
-    }
 }
 
 void    checkRange(eOperandType type, std::string const &value)

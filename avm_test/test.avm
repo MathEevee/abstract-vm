@@ -1,6 +1,8 @@
 push int8(20)
 push int8(20)
-push float(20.2525)
+push float(0)
+div
+mod
 add
 dump
 pop

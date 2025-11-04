@@ -2,6 +2,8 @@
 
 AVMExceptions::AVMExceptions(const char *msg) : _msg(msg) {}
 
+AVMExceptions::AVMExceptions(std::string msg) : _msg(msg.c_str()) {}
+
 AVMExceptions::~AVMExceptions(){}
 
 const char* AVMExceptions::what() const noexcept

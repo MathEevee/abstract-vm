@@ -311,14 +311,14 @@ bool    StackOperand::search_operator(Instruction instr)
     return (calc_operator(functptr[i], instr));
 }
 
-bool    StackOperand::unknow(std::string args)
+bool    StackOperand::unknow()
 {
     try {
         throw NotAnInstructionException();
     }
     catch (const AVMExceptions &e)
     {
-        if (e.handle(args) == Bonus)
+        if (e.handle() == Bonus)
             return (true);
         return (false);
     }
@@ -351,7 +351,7 @@ bool    StackOperand::execInstr(std::string args, Instruction instr)
 		case Exit:
         	return (exit());
         case UNKNOWN:
-            return (unknow(args));
+            return (unknow());
         default:
             return (search_operator(instr));
     }
