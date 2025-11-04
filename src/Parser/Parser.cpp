@@ -2,10 +2,14 @@
 
 Instruction parseInstruction(const std::string &cmd)
 {
-    static const std::array<std::pair<const char*, Instruction>, 11> table = {{
+    static const std::array<std::pair<const char*, Instruction>, 15> table = {{
     {"push", Push},
     {"pop", Pop},
     {"dump", Dump},
+    {"rdump", Rdump},
+    {"swap", Swap},
+    {"min", Min},
+    {"max", Max},
     {"assert", Assert},
     {"add", Add},
     {"sub", Sub},

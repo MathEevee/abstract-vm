@@ -99,7 +99,7 @@ bool StackOperand::assert(std::string args)
     }
     catch (const AVMExceptions &e)
     {
-        if (e.handle() == Bonus)
+        if (e.handle(Assert) == Bonus)
             return (true);
         return (false);
     }
@@ -117,6 +117,80 @@ bool     StackOperand::dump()
     return (true);
 }
 
+bool     StackOperand::rdump()
+{
+    std::stack<const IOperand *> tmp = this->_stack;
+    std::stack<const IOperand *> reverse;
+
+    while (!tmp.empty())
+    {
+        reverse.push(tmp.top());
+        tmp.pop();
+    }
+    while (!reverse.empty())
+    {
+        std::cout << (reverse.top()->toString()) << std::endl;
+        reverse.pop();
+    }
+    return (true);
+}
+
+bool     StackOperand::min()
+{
+    std::stack<const IOperand *> tmp = this->_stack;
+    try {
+        if (this->_stack.empty())
+            throw MinOrMaxException();
+
+        double  min = stod(tmp.top()->toString());
+        double  check;
+
+        while (!tmp.empty())
+        {
+            check = std::stod(tmp.top()->toString()); 
+            if (min > check)
+                min = check;
+            tmp.pop();
+        }
+        std::cout << min << std::endl;
+    }
+    catch (const AVMExceptions &e)
+    {
+        if (e.handle(Min) == Bonus)
+            return (true);
+        return (false);
+    }
+    return (true);
+}
+
+bool     StackOperand::max()
+{
+    std::stack<const IOperand *> tmp = this->_stack;
+    try {
+        if (this->_stack.empty())
+            throw MinOrMaxException();
+
+        double  max = stod(tmp.top()->toString());
+        double  check;
+
+        while (!tmp.empty())
+        {
+            check = std::stod(tmp.top()->toString()); 
+            if (max < check)
+                max = check;
+            tmp.pop();
+        }
+        std::cout << max << std::endl;
+    }
+    catch (const AVMExceptions &e)
+    {
+        if (e.handle(Max) == Bonus)
+            return (true);
+        return (false);
+    }
+    return (true);
+}
+
 bool     StackOperand::pop()
 {
     try {
@@ -129,7 +203,7 @@ bool     StackOperand::pop()
     }
     catch (const AVMExceptions &e)
     {
-        if (e.handle() == Bonus)
+        if (e.handle(Pop) == Bonus)
             return (true);
         return (false);
     }
@@ -140,10 +214,11 @@ bool StackOperand::exit(void)
     return (true);
 }
 
-
 bool    StackOperand::print()
 {
     try {
+        if (this->_stack.size() < 1)
+            throw PrintFalseException();
         if (this->_stack.top()->getType() == Int8)
         {
             std::cout << static_cast<char>(std::atoi((this->_stack.top()->toString().c_str()))) << std::endl;
@@ -154,14 +229,40 @@ bool    StackOperand::print()
     }
     catch (const AVMExceptions &e)
     {
-        if (e.handle() == Bonus)
+        if (e.handle(Print) == Bonus)
             return (true);
         return (false);
     }
-    
 }
 
-bool    StackOperand::calc_operator(const IOperand* (IOperand::*my_operator)(const IOperand&) const)
+bool    StackOperand::swap()
+{
+    const IOperand *a = NULL;
+    const IOperand *b = NULL;
+    try {
+        if (this->_stack.size() < 2)
+            throw SwapManyParamsException();
+        a = this->_stack.top();
+        this->_stack.pop();
+        b = this->_stack.top();
+        this->_stack.pop();
+        this->_stack.push(a);
+        this->_stack.push(b);
+        return (true);
+    }
+    catch (const AVMExceptions &e)
+    {
+        if (b != NULL)
+            this->_stack.push(b);
+        if (a != NULL)
+            this->_stack.push(a);
+        if (e.handle(Swap) == Bonus)
+            return (true);
+        return (false);
+    }
+}
+
+bool    StackOperand::calc_operator(const IOperand* (IOperand::*my_operator)(const IOperand&) const, Instruction instr)
 {
     const IOperand *a = NULL;
     const IOperand *b = NULL;
@@ -184,7 +285,7 @@ bool    StackOperand::calc_operator(const IOperand* (IOperand::*my_operator)(con
             this->_stack.push(b);
         if (a != NULL)
             this->_stack.push(a);
-        if (e.handle() == Bonus)
+        if (e.handle(instr) == Bonus)
             return (true);
         return (false);
     }
@@ -207,17 +308,17 @@ bool    StackOperand::search_operator(Instruction instr)
 			break;
 		i++;
 	}
-    return (calc_operator(functptr[i]));
+    return (calc_operator(functptr[i], instr));
 }
 
-bool    StackOperand::unknow()
+bool    StackOperand::unknow(std::string args)
 {
     try {
         throw NotAnInstructionException();
     }
     catch (const AVMExceptions &e)
     {
-        if (e.handle() == Bonus)
+        if (e.handle(args) == Bonus)
             return (true);
         return (false);
     }
@@ -235,6 +336,14 @@ bool    StackOperand::execInstr(std::string args, Instruction instr)
             return (pop());
         case Dump:
             return (dump());
+        case Rdump:
+            return (rdump());
+        case Swap:
+            return (swap());
+        case Min:
+            return (min());
+        case Max:
+            return (max());
         case Assert:
             return (assert(args));
 		case Print:
@@ -242,7 +351,7 @@ bool    StackOperand::execInstr(std::string args, Instruction instr)
 		case Exit:
         	return (exit());
         case UNKNOWN:
-            return (unknow());
+            return (unknow(args));
         default:
             return (search_operator(instr));
     }

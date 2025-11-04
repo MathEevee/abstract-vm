@@ -1,3 +1,4 @@
-psd
-sdaa
-add
+push int8(5)
+push double(5.2001)
+max
+exit

@@ -4,26 +4,10 @@
 #include <regex>
 #include <sstream>
 #include <array>
-#include "../Operand/Operand.hpp"
+#include "../Operand/IOperand.hpp"
+#include "../Exceptions/MyExceptions.hpp"
 
 #define VALUE_PATTERN R"(^\s*(int8|int16|int32)\((-?\d+)\)\s*$|^\s*(float|double)\((-?\d+(?:\.\d+)?(?:[eE][-+]?\d+)?)\)\s*$)"
-
-enum Instruction {
-    Comment,
-    Push,
-    Pop,
-    Dump,
-    Assert,
-    Print,
-    Exit,
-	UNKNOWN,
-    Add,
-    Sub,
-    Mul,
-    Div,
-    Mod
-};
-
 
 std::vector<std::string>	ParseLine(std::string line);
 eOperandType				parseType(const std::string &cmd);

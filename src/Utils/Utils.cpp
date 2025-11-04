@@ -7,6 +7,45 @@ void increment() {
     g_line_error++;
 }
 
+std::string     instruction_to_string(Instruction my_instruction)
+{
+    switch (my_instruction)
+    {
+        case Push :
+            return ("Push");
+        case Pop :
+            return ("Pop");
+        case Dump :
+            return ("Dump");
+        case Rdump :
+            return ("Rdump");
+        case Swap :
+            return ("Swap");
+        case Min :
+            return ("Min");
+        case Max :
+            return ("Max");
+        case Assert :
+            return ("Assert");
+        case Add :
+            return ("Add");
+        case Sub :
+            return ("Sub");
+        case Mul :
+            return ("Mul");
+        case Div :
+            return ("Div");
+        case Mod :
+            return ("Mod");
+        case Print :
+            return ("Print");
+        case Exit :
+            return ("Exit");
+        default :
+            return ("Unknow");
+    }
+}
+
 void    strcmpRange(double min, double max, std::string const &value)
 {
     double tmp = std::stod(value);

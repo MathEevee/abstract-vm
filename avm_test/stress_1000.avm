@@ -1,4 +1,7 @@
-push double(480.06)
+push double(1)
+push double(2)
+push double(3)
+push double(4)
 push float(557.58)
 add
 assert double(480.06)

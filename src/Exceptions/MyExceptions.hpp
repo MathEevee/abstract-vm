@@ -15,6 +15,25 @@ class PopEmptyStackException : public AVMExceptions
         PopEmptyStackException();
 };
 
+
+class PrintFalseException : public AVMExceptions
+{
+    public :
+        PrintFalseException();
+};
+
+class SwapManyParamsException : public AVMExceptions
+{
+    public :
+        SwapManyParamsException();
+};
+
+class MinOrMaxException : public AVMExceptions
+{
+    public :
+        MinOrMaxException();
+};
+
 class NoExitException : public AVMExceptions
 {
     public :
