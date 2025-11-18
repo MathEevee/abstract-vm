@@ -24,7 +24,6 @@ Cette VM permet de simuler le fonctionnement d’une machine classique de maniè
    ```
    ./avm
    ```
-
 ---
 
 
@@ -97,4 +96,89 @@ On décompose :
 ```
 
 L'étape 10 n'affiche rien car l'égalité est vraie.
+
+Le programme s'arrête à la première erreur rencontrée.
+
+# 🔻 Différences au lancement :
+
+1. Quand on lance ```./a.out <file.gmr>```, il s'arrête soit quand le fichier est fini avec une erreur (il faut un exit pour finir proprement).
+Le programme s'arrête quand il rencontre "exit".
+
+2. Quand on lance ```./a.out```, pour quitter le terminal on doit écrire ";;", si il n'y a pas eu "exit", on a une erreur. Si on fait "exit", alors toutes les autres instructions seront ignorées et il faudra écrire ";;" pour quitter proprement.
+
+## ⭐ Bonus
+
+Le programme continue en ignorant les lignes qui comportent des erreurs.
+
+Le code permet d'exécuter plusieurs instructions en une ligne.
+
+## 🚀 Lancer le programme :
+
+1. **Compiler** le programme :
+   ```bash
+   make bonus
+   ```
+   (dans le dossier où se situe le `Makefile`)
+
+2. **Exécuter** le programme :
+   ```bash
+   ./avm_bonus <file.avm>
+   ```
+   ou
+   ```
+   ./avm_bonus
+   ```
+---
+
+# ➕ Ajout instructions :
+
+| Instructions   | Définitions |                
+|------------|-------------|
+| **rdump**   | Affiche toute la stack à l'envers. |
+| **swap**   | Échange les deux valeurs en haut de la pile. |
+| **min**   | Affiche la valeur la plus petite (tout type confondu). |
+| **max**| Affiche la valeur la plus grande (tout type confondu). |
+---
+
+## ⚙️ Code :
+
+1. Vérification des paramètres.
+
+2. Si il y a un paramètre on essaie d'ouvrir le fichier. On rentre dans une boucle qui va lire chaque ligne.
+
+3. Parsing d'une string en vector<string> pour séparer à chaque espace.
+
+4. Passage sur tout le vector avec un lexer pour sélectionner les instructions pour s'adapter à celles qui prennent un paramètre.
+
+5. Exécution de l'instruction.
+
+6. Le code continue jusqu'à "exit" pour le lancement avec fichier et ";;" sans fichier.
+
+## 💬 Explications
+
+La classe principale à une stack<IOperand *>, le but était de rendre le code le plus polyvalent en évitant les répétitions.
+L'utilisation de template à permis d'éviter la répétition des déclarations :
+```
+IOperand const * createInt8( std::string const & value ) const;
+IOperand const * createInt16( std::string const & value ) const;
+IOperand const * createInt32( std::string const & value ) const;
+IOperand const * createFloat( std::string const & value ) const;
+IOperand const * createDouble( std::string const & value ) const;
+```
+
+L'utilisation d'un switch case qui répertorie les différents types permets d'épurer le code.
+
+Exemple de la création d'un enum :
+
+<img width="709" height="351" alt="Screenshot from 2025-11-18 14-10-23" src="https://github.com/user-attachments/assets/2023aef2-5b99-47c9-aac3-c595bf8de7f8" />
+
+La même opération a été faite pour les instructions, cela permet de faire évoluer le code si on souhaite en rajouter :
+
+<img width="583" height="616" alt="Screenshot from 2025-11-18 14-11-52" src="https://github.com/user-attachments/assets/1f2fcc7a-4c47-4cdf-9a67-ad0317b976ab" />
+
+Une autre façon d'éviter la répétition :
+
+Pour les opérateurs on doit toujours, récupérer les éléments les plus haut de la pile, vérifier, sécuriser, nettoyer la mémoire et envoyer le résultat dans la pile donc :
+
+<img width="847" height="768" alt="Screenshot from 2025-11-18 14-15-06" src="https://github.com/user-attachments/assets/8f4ea56f-c816-4211-a835-82bc1ed3d7c3" />
 
